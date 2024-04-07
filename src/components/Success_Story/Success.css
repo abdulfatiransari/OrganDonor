@@ -8,11 +8,10 @@
     font-weight: 400;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,500;0,600;0,700;1,400;1,600&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,500&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,500;0,600;0,700;1,400;1,600&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,500&display=swap");
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .hove {
@@ -22,7 +21,7 @@ body {
 
 .hove:hover {
     box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.1);
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .cd {
@@ -34,7 +33,7 @@ body {
 .upper_data h4 {
     font-size: 18px;
     color: rgba(17, 17, 17, 0.849);
-    letter-spacing: .5px;
+    letter-spacing: 0.5px;
     font-weight: 500;
 }
 
@@ -51,14 +50,14 @@ body {
 
 .lower_data h5 {
     font-size: 15px;
-    letter-spacing: .4px;
+    letter-spacing: 0.4px;
     font-weight: 400;
     color: rgba(17, 17, 17, 0.849);
 }
 
 .lower_data span {
     font-size: 15px;
-    letter-spacing: .4px;
+    letter-spacing: 0.4px;
     color: rgba(17, 17, 17, 0.849);
 }
 
@@ -73,7 +72,7 @@ body {
 .last_data p {
     font-size: 14px;
     margin-top: 18px;
-    letter-spacing: .2px;
+    letter-spacing: 0.2px;
     color: rgba(17, 17, 17, 0.849);
 }
 
@@ -81,7 +80,41 @@ body {
     width: 45px;
 }
 
-@media (max-width:600px) {
+.second {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.second h1 {
+    font-size: 50px;
+    font-family: "Lato";
+}
+
+h1.second {
+    font-weight: 350;
+}
+
+h1.second span {
+    position: relative;
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border-bottom: 1px solid mediumseagreen;
+}
+
+h1.second span:after {
+    content: "";
+    position: absolute;
+    bottom: calc(-100% - 1px);
+    margin-left: -10px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border-top: 1px solid mediumseagreen;
+}
+
+@media (max-width: 600px) {
     .con {
         flex-direction: column;
         align-items: center;

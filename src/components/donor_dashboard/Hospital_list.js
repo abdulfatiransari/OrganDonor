@@ -68,9 +68,9 @@ class HospitalList extends Component {
                                         control='select'
                                         required
                                     >
-                                        <option value='Gwalior'>Gwalior</option>
-                                        <option value='New Delhi'>New Delhi</option>
-                                        <option value='Pune'>Pune</option>
+                                        <option value='Karachi'>Karachi</option>
+                                        <option value='Lahore'>Lahore</option>
+                                        <option value='Islamabad'>Islamabad</option>
                                     </Form.Field>
                                 </Form.Group>
                                 <Button positive type='submit'>Check</Button>

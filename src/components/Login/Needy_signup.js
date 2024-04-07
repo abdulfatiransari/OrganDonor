@@ -12,7 +12,7 @@ function Needy_signup() {
                 <div className="form_wrapper">
                     <div className="form_container">
                         <div className="title_container">
-                            <h2>Organ Donation Signup</h2>
+                            <h2>Organ Recipient Signup</h2>
                         </div>
                         <div className="row clearfix">
                             <div className="">

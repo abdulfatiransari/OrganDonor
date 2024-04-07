@@ -1,17 +1,17 @@
-import React from 'react'
-import Card from 'react-bootstrap/Card'
-import './Cards.css';
-
+import React from "react";
+import Card from "react-bootstrap/Card";
+import "./Cards.css";
 
 const Cards = ({ data }) => {
     return (
-
         <div className="cards-container">
             {data.map((element, k) => {
                 return (
-                    <Card key={k} className="custom-card">
-                        <Card.Img variant="top" className="card-image" src={element.imgdata} />
-
+                    <Card
+                        key={k}
+                        className="custom-card"
+                        style={{ backgroundColor: "transparent", border: "1px solid", borderColor: "#FFFFFF" }}
+                    >
                         <div className="card-body">
                             <div className="upper-data">
                                 <h4 className="card-title">{element.rname}</h4>
@@ -27,9 +27,7 @@ const Cards = ({ data }) => {
                 );
             })}
         </div>
+    );
+};
 
-
-    )
-}
-
-export default Cards
+export default Cards;

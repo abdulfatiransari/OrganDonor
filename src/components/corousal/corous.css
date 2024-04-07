@@ -11,14 +11,13 @@
 } */
 
 .container1 {
-    /* display: flex;
+    display: flex;
     align-items: center;
-    justify-content: center */
-
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 20px;
+    justify-content: center;
+    /* display: grid; */
+    /* align-items: center; */
+    /* grid-template-columns: 1fr 1fr; */
+    /* column-gap: 20px; */
 }
 
 img {
@@ -29,7 +28,7 @@ img {
 }
 
 /* .image {
-    flex-basis: 40%
+    flex-basis: 40%;
 } */
 
 .text {
@@ -39,14 +38,13 @@ img {
 
 .navbar.fixed {
     background-color: #fcfcfcd0;
-    transition: .3 ease-in-out;
-
+    transition: 0.3 ease-in-out;
 }
 
 .trans {
     background-color: transparent;
     font-size: large;
-    font-family: 'Roboto';
+    font-family: "Roboto";
 }
 
 .navbar.initial {
@@ -58,7 +56,7 @@ img {
     font-size: 14px;
     text-transform: uppercase;
     text-decoration: none;
-    color: #031D44;
+    color: #031d44;
     padding: 20px 0px;
     margin: 0px 20px;
     display: inline-block;
@@ -75,7 +73,7 @@ img {
     height: 5px;
     content: "";
     position: absolute;
-    background-color: #031D44;
+    background-color: #031d44;
 }
 
 .nav-link-ltr::before {
@@ -125,9 +123,8 @@ font-family: sans-serif;
 } */
 
 .head {
-    font-family: 'Dancing Script', cursive;
+    font-family: "Dancing Script", cursive;
 }
-
 
 .heading h1 {
     background-color: transparent;
@@ -137,7 +134,6 @@ font-family: sans-serif;
     transform: scale(0.94);
     animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1) infinite;
     font-size: x-large;
-
 }
 
 @keyframes scale {
@@ -147,7 +143,7 @@ font-family: sans-serif;
 }
 
 span {
-    color: rgb(60, 6, 79);
+    color: rgb(201, 194, 194);
     background-color: transparent;
     display: inline-block;
     opacity: 0;
@@ -232,7 +228,7 @@ span:nth-child(19) {
 }
 
 span:nth-child(20) {
-    animation: fade-in 0.8s 2.0s forwards cubic-bezier(0.11, 0, 0.5, 0);
+    animation: fade-in 0.8s 2s forwards cubic-bezier(0.11, 0, 0.5, 0);
 }
 
 span:nth-child(21) {
@@ -259,17 +255,12 @@ span:nth-child(26) {
     animation: fade-in 0.8s 2.6s forwards cubic-bezier(0.11, 0, 0.5, 0);
 }
 
-
-
 @keyframes fade-in {
     100% {
         opacity: 1;
         filter: blur(0);
     }
 }
-
-
-
 
 .buttn {
     font-size: medium;
@@ -287,7 +278,7 @@ span:nth-child(26) {
 }
 
 .buttn:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -299,7 +290,7 @@ span:nth-child(26) {
 }
 
 .buttn:before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;

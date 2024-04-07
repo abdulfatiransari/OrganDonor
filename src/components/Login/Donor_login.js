@@ -97,7 +97,7 @@ class Donor_login extends Component {
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <span class="text-primary">Check Donor Info and Status</span>
                                     </h1>
-                                    <p style={{ color: "hsl(217, 10%, 50.8%)" }}>
+                                    <p style={{ color: "hsl(219, 10%, 50.8%)", fontSize:"15px" }}>
                                         “I never used to pay that much attention to organ donation, but I’m tremendously glad for it: it turned out that I was one of the ones in need. I hope my donor’s family will be blessed a thousand times for their sacrifice.” –Karl Black
                                     </p>
 
