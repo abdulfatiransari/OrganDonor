@@ -14,19 +14,24 @@ import PatientRecord from "./components/Hospital/Patient_list";
 import RegisterRecipient from "./components/Hospital/Register_recipient";
 import HospitalList from "./components/donor_dashboard/Hospital_list";
 import TransplantMatch from "./components/Hospital/transplant-match";
+import { AuthContext } from "./components/Context";
+import { useState } from "react";
 function App() {
+    const [currentUser, setCurrentUser] = useState();
+    const [address, setAddress] = useState("");
     return (
         <>
-            <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/login" element={<Landingpage />} />
-                <Route exact path="/Donor_Register" element={<Loginsignup />} />
-                <Route exact path="/Needy_signup" element={<Needysignup />} />
-                <Route exact path="/Hospital_login" element={<Hospitallogin />} />
-                <Route exact path="/Donor_login" element={<Donorlogin />} />
-                {/* dummy */}
-                <Route exact path="/Main_page" element={<Mainpage />} />
-                {/* <Route
+            <AuthContext.Provider value={{ currentUser, setCurrentUser, address, setAddress }}>
+                <Routes>
+                    <Route exact path="/" element={<Home />} />
+                    <Route exact path="/login" element={<Landingpage />} />
+                    <Route exact path="/Donor_Register" element={<Loginsignup />} />
+                    <Route exact path="/Needy_signup" element={<Needysignup />} />
+                    <Route exact path="/Hospital_login" element={<Hospitallogin />} />
+                    <Route exact path="/Donor_login" element={<Donorlogin />} />
+                    {/* dummy */}
+                    <Route exact path="/Main_page" element={<Mainpage />} />
+                    {/* <Route
                     exact
                     path="/Main_page"
                     element={
@@ -37,8 +42,8 @@ function App() {
                         )
                     }
                 /> */}
-                <Route exact path="/Approve_donor" element={<ApproveDonor />} />
-                {/* <Route
+                    <Route exact path="/Approve_donor" element={<ApproveDonor />} />
+                    {/* <Route
                     exact
                     path="/Approve_donor"
                     element={
@@ -49,8 +54,8 @@ function App() {
                         )
                     }
                 /> */}
-                <Route exact path="/Patient_list" element={<PatientRecord />} />
-                {/* <Route
+                    <Route exact path="/Patient_list" element={<PatientRecord />} />
+                    {/* <Route
                     exact
                     path="/Patient_list"
                     element={
@@ -61,8 +66,8 @@ function App() {
                         )
                     }
                 /> */}
-                <Route exact path="/RegisterRecipient" element={<RegisterRecipient />} />
-                {/* <Route
+                    <Route exact path="/RegisterRecipient" element={<RegisterRecipient />} />
+                    {/* <Route
                     exact
                     path="/RegisterRecipient"
                     element={
@@ -73,8 +78,8 @@ function App() {
                         )
                     }
                 /> */}
-                <Route exact path="/Transplant_match" element={<TransplantMatch />} />
-                {/* <Route
+                    <Route exact path="/Transplant_match" element={<TransplantMatch />} />
+                    {/* <Route
                     exact
                     path="/Transplant_match"
                     element={
@@ -86,8 +91,9 @@ function App() {
                     }
                 /> */}
 
-                <Route exact path="/Hospital_list" element={<HospitalList />} />
-            </Routes>
+                    <Route exact path="/Hospital_list" element={<HospitalList />} />
+                </Routes>
+            </AuthContext.Provider>
         </>
     );
 }

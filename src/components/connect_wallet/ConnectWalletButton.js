@@ -1,22 +1,17 @@
 import "./connect.css";
 
-const ConnectWalletButton = ({
-    onPressLogout,
-    onPressConnect,
-    loading,
-    address,
-}) => {
+const ConnectWalletButton = ({ onPressLogout, onPressConnect, loading, address }) => {
     return (
         <div>
             {address && !loading ? (
-                <button onClick={onPressLogout} className="connect-wallet">
-                    Disconnect
-                </button>
+                <>
+                    <button onClick={onPressLogout} className="connect-wallet">
+                        Disconnect
+                    </button>
+                    <p>{address}</p>
+                </>
             ) : loading ? (
-                <button
-                    className="connect-wallet connect-button-loading"
-                    disabled
-                >
+                <button className="connect-wallet connect-button-loading" disabled>
                     <div>Loading...</div>
                 </button>
             ) : (

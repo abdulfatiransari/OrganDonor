@@ -1,10 +1,12 @@
 import Web3 from "web3";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ConnectWalletButton from "../connect_wallet/ConnectWalletButton";
+import { AuthContext } from "../Context";
 
 const Front = () => {
     const [loading, setLoading] = useState(false);
-    const [address, setAddress] = useState("");
+    const { address, setAddress } = useContext(AuthContext);
+    console.log("🚀 ~ Front ~ address:", address);
 
     const onPressConnect = async () => {
         setLoading(true);
@@ -18,7 +20,6 @@ const Front = () => {
 
                 const account = Web3.utils.toChecksumAddress(accounts[0]);
                 setAddress(account);
-                alert('Wallet Connected Successfully');
             }
         } catch (error) {
             console.log(error);
