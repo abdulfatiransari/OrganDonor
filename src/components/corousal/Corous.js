@@ -3,7 +3,6 @@ import "../corousal/corous.css";
 
 const Corous = () => {
     return (
-        //     , where one life ends but countless others bloom.
         <>
             <div className="con">
                 <div className="container1" id="courous">

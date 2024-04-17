@@ -15,6 +15,11 @@
     width: 75%;
     display: flex;
     flex-direction: row;
+    @media (max-width: 768px) {
+        /* Adjust styles for smaller screens */
+        display: flex;
+        flex-direction: column-reverse;
+    }
 }
 
 .images {
@@ -41,7 +46,13 @@
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
-    padding: 100px;
+    padding: 50px;
+    line-height: normal;
+
+    @media (max-width: 768px) {
+        font-size: 30px; /* Adjust font size for smaller screens */
+        padding: 5px; /* Adjust padding for smaller screens */
+    }
 }
 
 .list-button {
@@ -78,6 +89,14 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+
+    @media (max-width: 768px) {
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 90%; /* Make button full width on smaller screens */
+        font-size: 16px; /* Adjust font size for smaller screens */
+        padding: 14px 18px;
+    }
 }
 
 .button-70 {

@@ -18,6 +18,11 @@
     /* align-items: center; */
     /* grid-template-columns: 1fr 1fr; */
     /* column-gap: 20px; */
+    @media (max-width: 768px) {
+        /* Adjust styles for smaller screens */
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 img {
@@ -27,9 +32,14 @@ img {
     max-height: 100%;
 }
 
-/* .image {
-    flex-basis: 40%;
-} */
+.image {
+    /* flex-basis: 40%; */
+    @media (max-width: 768px) {
+        /* Adjust styles for smaller screens */
+        display: flex;
+        justify-content: center;
+    }
+}
 
 .text {
     font-size: 2em;
