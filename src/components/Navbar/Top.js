@@ -103,14 +103,11 @@ const Top = () => {
                                     >
                                         Partner with us
                                     </Nav.Link>
-                                    <Nav.Link
-                                        href="/Donor_login"
-                                        className="button-70"
-                                        smooth
-                                        style={{ color: "white" }}
-                                    >
-                                        Login/Signup
-                                    </Nav.Link>
+                                    <Nav>
+                                        <Link to="/Donor_login" className="button-70" smooth style={{ color: "white" }}>
+                                            Login/Signup
+                                        </Link>
+                                    </Nav>
                                 </Nav>
                             </Offcanvas.Body>
                         </Navbar.Offcanvas>

@@ -61,170 +61,172 @@ const DonorSignUp = () => {
 
     return (
         <>
-            <Top2 />
-            <left>
-                <div className="login">
-                    <div className="form_wrapper" style={{ textAlign: "right" }}>
-                        <div className="form_container">
-                            <div className="title_container">
-                                <h2>Organ Donor Signup</h2>
-                            </div>
-                            <div className="row clearfix">
-                                <div className="">
-                                    <form onSubmit={onSubmit}>
-                                        <div className="input_field select_option">
-                                            {" "}
-                                            <span>
-                                                <i aria-hidden="true" className="fa fa-envelope"></i>
-                                            </span>
-                                            <input
-                                                type="email"
-                                                name="email"
-                                                placeholder="Email"
-                                                value={state.email}
-                                                required
-                                                onChange={onChange}
-                                            />
-                                        </div>
-                                        <div className="input_field select_option">
-                                            {" "}
-                                            <span>
-                                                <i aria-hidden="true" className="fa fa-key"></i>
-                                            </span>
-                                            <input
-                                                type="password"
-                                                name="pass"
-                                                placeholder="Password"
-                                                value={state.pass}
-                                                required
-                                                onChange={onChange}
-                                            />
-                                        </div>
-                                        <div className="input_field select_option ">
-                                            <span>
-                                                <FontAwesomeIcon icon={faPhone} />
-                                            </span>
-                                            <input
-                                                type="tel"
-                                                className="icon"
-                                                style={{ width: "360px", height: "33px" }}
-                                                value={state.phone}
-                                                onChange={onChange}
-                                                name="phone"
-                                                placeholder="Phone number"
-                                            />
-                                        </div>
+            <div style={{ background: "#000000", minHeight: "100vh" }}>
+                <Top2 />
+                <left>
+                    <div className="login">
+                        <div className="form_wrapper" style={{ textAlign: "right", background: "#00000080" }}>
+                            <div className="form_container">
+                                <div className="title_container">
+                                    <h2 style={{ color: "white" }}>Organ Donor Signup</h2>
+                                </div>
+                                <div className="row clearfix">
+                                    <div className="">
+                                        <form onSubmit={onSubmit}>
+                                            <div className="input_field select_option">
+                                                {" "}
+                                                <span>
+                                                    <i aria-hidden="true" className="fa fa-envelope"></i>
+                                                </span>
+                                                <input
+                                                    type="email"
+                                                    name="email"
+                                                    placeholder="Email"
+                                                    value={state.email}
+                                                    required
+                                                    onChange={onChange}
+                                                />
+                                            </div>
+                                            <div className="input_field select_option">
+                                                {" "}
+                                                <span>
+                                                    <i aria-hidden="true" className="fa fa-key"></i>
+                                                </span>
+                                                <input
+                                                    type="password"
+                                                    name="pass"
+                                                    placeholder="Password"
+                                                    value={state.pass}
+                                                    required
+                                                    onChange={onChange}
+                                                />
+                                            </div>
+                                            <div className="input_field select_option ">
+                                                <span>
+                                                    <FontAwesomeIcon icon={faPhone} />
+                                                </span>
+                                                <input
+                                                    type="tel"
+                                                    className="icon"
+                                                    // style={{ width: "360px", height: "33px" }}
+                                                    value={state.phone}
+                                                    onChange={onChange}
+                                                    name="phone"
+                                                    placeholder="Phone number"
+                                                />
+                                            </div>
 
-                                        <div className="row clearfix">
-                                            <div className="col_half">
-                                                <div className="input_field select_option">
-                                                    <input
-                                                        type="text"
-                                                        name="fname"
-                                                        placeholder="First Name"
-                                                        value={state.fname}
-                                                        onChange={onChange}
-                                                        required
-                                                    />
+                                            <div className="row clearfix">
+                                                <div className="col_half">
+                                                    <div className="input_field select_option">
+                                                        <input
+                                                            type="text"
+                                                            name="fname"
+                                                            placeholder="First Name"
+                                                            value={state.fname}
+                                                            onChange={onChange}
+                                                            required
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="col_half">
+                                                    <div className="input_field select_option">
+                                                        <input
+                                                            type="text"
+                                                            name="lname"
+                                                            placeholder="Last Name"
+                                                            value={state.lname}
+                                                            onChange={onChange}
+                                                            required
+                                                        />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div className="col_half">
-                                                <div className="input_field select_option">
-                                                    <input
-                                                        type="text"
-                                                        name="lname"
-                                                        placeholder="Last Name"
-                                                        value={state.lname}
-                                                        onChange={onChange}
-                                                        required
-                                                    />
-                                                </div>
+                                            <div className="input_field select_option">
+                                                <select
+                                                    name="gender"
+                                                    placeholder="Gender"
+                                                    value={state.gender}
+                                                    onChange={onChange}
+                                                    required
+                                                >
+                                                    <option value="" disabled hidden>
+                                                        <center>Select Gender</center>
+                                                    </option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                    <option value="Others">Other</option>
+                                                </select>
                                             </div>
-                                        </div>
-                                        <div className="input_field select_option">
-                                            <select
-                                                name="gender"
-                                                placeholder="Gender"
-                                                value={state.gender}
-                                                onChange={onChange}
-                                                required
-                                            >
-                                                <option value="" disabled hidden>
-                                                    <center>Select Gender</center>
-                                                </option>
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                                <option value="Others">Other</option>
-                                            </select>
-                                        </div>
-                                        <div className="input_field select_option">
-                                            <select
-                                                name="bloodgroup"
-                                                placeholder="Blood Group"
-                                                value={state.bloodgroup}
-                                                onChange={onChange}
-                                                required
-                                            >
-                                                <option>Select a Blood Type</option>
-                                                <option value="A-">A-</option>
-                                                <option value="A+">A+</option>
-                                                <option value="B-">B-</option>
-                                                <option value="B+">B+</option>
-                                                <option value="AB-">AB-</option>
-                                                <option value="AB+">AB+</option>
-                                                <option value="O-">O-</option>
-                                                <option value="O+">O+</option>
-                                            </select>
-                                        </div>
-                                        <div className="input_field select_option">
-                                            <select
-                                                name="city"
-                                                placeholder="Choose City"
-                                                value={state.city}
-                                                onChange={onChange}
-                                                required
-                                            >
-                                                <option>Select a City for Hospital location</option>
-                                                <option value="Karachi">Karachi</option>
-                                                <option value="Lahore">Lahore</option>
-                                                <option value="Islamabad">Islamabad</option>
-                                                <option value="Rawalpindi">Rawalpindi</option>
-                                                <option value="Peshawar">Peshawar</option>
-                                                <option value="Multan">Multan</option>
-                                            </select>
-                                        </div>
-                                        <div className="input_field select_option">
-                                            <select
-                                                name="organ"
-                                                placeholder="Choose Organ"
-                                                value={state.organ}
-                                                onChange={onChange}
-                                                required
-                                            >
-                                                <option>Select a organ to donate</option>
-                                                <option value="Eyes">Eyes</option>
-                                                <option value="Heart">Heart</option>
-                                                <option value="Lungs">Lungs</option>
-                                                <option value="Liver">Liver</option>
-                                                <option value="Pancreas">Pancreas</option>
-                                                <option value="Kidney">Kidney</option>
-                                            </select>
-                                        </div>
+                                            <div className="input_field select_option">
+                                                <select
+                                                    name="bloodgroup"
+                                                    placeholder="Blood Group"
+                                                    value={state.bloodgroup}
+                                                    onChange={onChange}
+                                                    required
+                                                >
+                                                    <option>Select a Blood Type</option>
+                                                    <option value="A-">A-</option>
+                                                    <option value="A+">A+</option>
+                                                    <option value="B-">B-</option>
+                                                    <option value="B+">B+</option>
+                                                    <option value="AB-">AB-</option>
+                                                    <option value="AB+">AB+</option>
+                                                    <option value="O-">O-</option>
+                                                    <option value="O+">O+</option>
+                                                </select>
+                                            </div>
+                                            <div className="input_field select_option">
+                                                <select
+                                                    name="city"
+                                                    placeholder="Choose City"
+                                                    value={state.city}
+                                                    onChange={onChange}
+                                                    required
+                                                >
+                                                    <option>Select a City for Hospital location</option>
+                                                    <option value="Karachi">Karachi</option>
+                                                    <option value="Lahore">Lahore</option>
+                                                    <option value="Islamabad">Islamabad</option>
+                                                    <option value="Rawalpindi">Rawalpindi</option>
+                                                    <option value="Peshawar">Peshawar</option>
+                                                    <option value="Multan">Multan</option>
+                                                </select>
+                                            </div>
+                                            <div className="input_field select_option">
+                                                <select
+                                                    name="organ"
+                                                    placeholder="Choose Organ"
+                                                    value={state.organ}
+                                                    onChange={onChange}
+                                                    required
+                                                >
+                                                    <option>Select a organ to donate</option>
+                                                    <option value="Eyes">Eyes</option>
+                                                    <option value="Heart">Heart</option>
+                                                    <option value="Lungs">Lungs</option>
+                                                    <option value="Liver">Liver</option>
+                                                    <option value="Pancreas">Pancreas</option>
+                                                    <option value="Kidney">Kidney</option>
+                                                </select>
+                                            </div>
 
-                                        <input className="button" type="submit" value="Register" />
+                                            <input className="button" type="submit" value="Register" />
 
-                                        {state.errMsg && state.errMsg.length > 0 ? (
-                                            <Message error header="Oops!!" content={state.errMsg} />
-                                        ) : (
-                                            <div />
-                                        )}
-                                    </form>
+                                            {state.errMsg && state.errMsg.length > 0 ? (
+                                                <Message error header="Oops!!" content={state.errMsg} />
+                                            ) : (
+                                                <div />
+                                            )}
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </left>
+                </left>
+            </div>
         </>
     );
 };

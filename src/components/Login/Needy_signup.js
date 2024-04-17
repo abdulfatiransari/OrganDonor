@@ -73,141 +73,143 @@ function Needy_signup() {
 
     return (
         <>
-            <Top2 />
-            <div className="login">
-                <div className="form_wrapper">
-                    <div className="form_container">
-                        <div className="title_container">
-                            <h2>Organ Recipient Signup</h2>
-                        </div>
-                        <div className="row clearfix">
-                            <div className="">
-                                <form onSubmit={onSubmit}>
-                                    <div className="input_field select_option">
-                                        {" "}
-                                        <span>
-                                            <i aria-hidden="true" className="fa fa-envelope"></i>
-                                        </span>
-                                        <input
-                                            type="email"
-                                            name="email"
-                                            placeholder="Email"
-                                            value={state.email}
-                                            required
-                                            onChange={onChange}
-                                        />
-                                    </div>
-                                    <div className="input_field select_option">
-                                        {" "}
-                                        <span>
-                                            <i aria-hidden="true" className="fa fa-key"></i>
-                                        </span>
-                                        <input
-                                            type="password"
-                                            name="pass"
-                                            placeholder="Password"
-                                            value={state.pass}
-                                            required
-                                            onChange={onChange}
-                                        />
-                                    </div>
-                                    <div className="input_field select_option ">
-                                        <span>
-                                            <FontAwesomeIcon icon={faPhone} />
-                                        </span>
-                                        <input
-                                            type="tel"
-                                            className="icon"
-                                            style={{ width: "360px", height: "33px" }}
-                                            value={state.phone}
-                                            onChange={onChange}
-                                            name="phone"
-                                            placeholder="Phone number"
-                                        />
-                                    </div>
-                                    <div className="row clearfix">
-                                        <div className="col_half">
-                                            <div className="input_field select_option">
-                                                <input
-                                                    type="text"
-                                                    name="fname"
-                                                    placeholder="First Name"
-                                                    value={state.fname}
-                                                    onChange={onChange}
-                                                    required
-                                                />
+            <div style={{ background: "#000000", minHeight: "100vh" }}>
+                <Top2 />
+                <div className="login">
+                    <div className="form_wrapper">
+                        <div className="form_container">
+                            <div className="title_container">
+                                <h2>Organ Recipient Signup</h2>
+                            </div>
+                            <div className="row clearfix">
+                                <div className="">
+                                    <form onSubmit={onSubmit}>
+                                        <div className="input_field select_option">
+                                            {" "}
+                                            <span>
+                                                <i aria-hidden="true" className="fa fa-envelope"></i>
+                                            </span>
+                                            <input
+                                                type="email"
+                                                name="email"
+                                                placeholder="Email"
+                                                value={state.email}
+                                                required
+                                                onChange={onChange}
+                                            />
+                                        </div>
+                                        <div className="input_field select_option">
+                                            {" "}
+                                            <span>
+                                                <i aria-hidden="true" className="fa fa-key"></i>
+                                            </span>
+                                            <input
+                                                type="password"
+                                                name="pass"
+                                                placeholder="Password"
+                                                value={state.pass}
+                                                required
+                                                onChange={onChange}
+                                            />
+                                        </div>
+                                        <div className="input_field select_option ">
+                                            <span>
+                                                <FontAwesomeIcon icon={faPhone} />
+                                            </span>
+                                            <input
+                                                type="tel"
+                                                className="icon"
+                                                // style={{ width: "360px", height: "33px" }}
+                                                value={state.phone}
+                                                onChange={onChange}
+                                                name="phone"
+                                                placeholder="Phone number"
+                                            />
+                                        </div>
+                                        <div className="row clearfix">
+                                            <div className="col_half">
+                                                <div className="input_field select_option">
+                                                    <input
+                                                        type="text"
+                                                        name="fname"
+                                                        placeholder="First Name"
+                                                        value={state.fname}
+                                                        onChange={onChange}
+                                                        required
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div className="col_half">
+                                                <div className="input_field select_option">
+                                                    <input
+                                                        type="text"
+                                                        name="lname"
+                                                        placeholder="Last Name"
+                                                        value={state.lname}
+                                                        onChange={onChange}
+                                                        required
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="col_half">
-                                            <div className="input_field select_option">
-                                                <input
-                                                    type="text"
-                                                    name="lname"
-                                                    placeholder="Last Name"
-                                                    value={state.lname}
-                                                    onChange={onChange}
-                                                    required
-                                                />
-                                            </div>
+                                        <div className="input_field select_option">
+                                            <select
+                                                name="gender"
+                                                placeholder="Gender"
+                                                value={state.gender}
+                                                onChange={onChange}
+                                                required
+                                            >
+                                                <option value="" disabled hidden>
+                                                    <center>Select Gender</center>
+                                                </option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Others">Other</option>
+                                            </select>
                                         </div>
-                                    </div>
-                                    <div className="input_field select_option">
-                                        <select
-                                            name="gender"
-                                            placeholder="Gender"
-                                            value={state.gender}
-                                            onChange={onChange}
-                                            required
-                                        >
-                                            <option value="" disabled hidden>
-                                                <center>Select Gender</center>
-                                            </option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                            <option value="Others">Other</option>
-                                        </select>
-                                    </div>
-                                    <div className="input_field select_option">
-                                        <select
-                                            name="bloodgroup"
-                                            placeholder="Blood Group"
-                                            value={state.bloodgroup}
-                                            onChange={onChange}
-                                            required
-                                        >
-                                            <option>Select a Blood Type</option>
-                                            <option value="A-">A-</option>
-                                            <option value="A+">A+</option>
-                                            <option value="B-">B-</option>
-                                            <option value="B+">B+</option>
-                                            <option value="AB-">AB-</option>
-                                            <option value="AB+">AB+</option>
-                                            <option value="O-">O-</option>
-                                            <option value="O+">O+</option>
-                                        </select>
-                                    </div>
-                                    <div className="input_field">
-                                        <input
-                                            type="number"
-                                            name="weight"
-                                            placeholder="weight(in kg)"
-                                            required
-                                            onChange={onChange}
-                                        />
-                                    </div>
-                                    <div className="input_field">
-                                        <input
-                                            type="number"
-                                            name="height"
-                                            placeholder="height(in cm)"
-                                            required
-                                            onChange={onChange}
-                                        />
-                                    </div>
+                                        <div className="input_field select_option">
+                                            <select
+                                                name="bloodgroup"
+                                                placeholder="Blood Group"
+                                                value={state.bloodgroup}
+                                                onChange={onChange}
+                                                required
+                                            >
+                                                <option>Select a Blood Type</option>
+                                                <option value="A-">A-</option>
+                                                <option value="A+">A+</option>
+                                                <option value="B-">B-</option>
+                                                <option value="B+">B+</option>
+                                                <option value="AB-">AB-</option>
+                                                <option value="AB+">AB+</option>
+                                                <option value="O-">O-</option>
+                                                <option value="O+">O+</option>
+                                            </select>
+                                        </div>
+                                        <div className="input_field">
+                                            <input
+                                                type="number"
+                                                name="weight"
+                                                placeholder="weight(in kg)"
+                                                required
+                                                onChange={onChange}
+                                            />
+                                        </div>
+                                        <div className="input_field">
+                                            <input
+                                                type="number"
+                                                name="height"
+                                                placeholder="height(in cm)"
+                                                required
+                                                onChange={onChange}
+                                            />
+                                        </div>
 
-                                    <Front />
-                                    <input className="button" type="submit" value="Register" />
-                                </form>
+                                        <Front />
+                                        <input className="button" type="submit" value="Register" />
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
