@@ -1,32 +1,16 @@
 import React from "react";
-import Hospital_nav from "./Hospital_nav";
+import HospitalNav from "./Hospital_nav";
 import Testimonials from "./Testimonials";
 
-
 function Main_page() {
-
     return (
         <>
-            <Hospital_nav />
-            <Testimonials />
-
+            <div style={{ minHeight: "100vh", background: "#000000" }}>
+                <HospitalNav />
+                <Testimonials />
+            </div>
         </>
-
-
-
     );
-
-
-
-
-
-
-
-
-
-
-
-};
-
+}
 
 export default Main_page;

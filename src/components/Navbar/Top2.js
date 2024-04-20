@@ -8,48 +8,14 @@ import { HashLink as Link } from "react-router-hash-link";
 const Top2 = () => {
     return (
         <>
-            {/* <Navbar position="sticky" fixed="top" className="navbar fixed" style={{ backgroundColor: "#00000080" }}>
-                <Container className="trans">
-                    <Nav className="me-auto trans">
-                        <Link
-                            to="/Donor_login"
-                            className=" trans nav-link nav-link-ltr"
-                            smooth
-                            style={{ color: "white" }}
-                        >
-                            Donor Info
-                        </Link>
-                        <Link
-                            to="/Donor_Register"
-                            className=" trans nav-link nav-link-ltr"
-                            smooth
-                            style={{ color: "white" }}
-                        >
-                            Donor Register
-                        </Link>
-                        <Link to="/Hospital_login" className="trans nav-link nav-link-ltr" style={{ color: "white" }}>
-                            Partner with us (for Hospitals)
-                        </Link>
-                    </Nav>
-                    <Nav className="trans">
-                        <Link to="/" className="button-70" href="#pricing">
-                            {" "}
-                            Go Back
-                        </Link>
-                    </Nav>
-                </Container>
-            </Navbar> */}
-
             {["lg"].map((expand) => (
                 <Navbar key={expand} expand={expand} className="mb-3" style={{ backgroundColor: "#00000080" }}>
                     <Container fluid>
-                        <Navbar.Brand
-                            href="#courous"
-                            className="trans nav-link nav-link-ltr head"
-                            style={{ color: "white" }}
-                        >
-                            Organ-Chain
-                        </Navbar.Brand>
+                        <Navbar>
+                            <Link to="/" className="trans nav-link nav-link-ltr head" style={{ color: "white" }}>
+                                Organ-Chain
+                            </Link>
+                        </Navbar>
                         <Navbar.Toggle
                             aria-controls={`offcanvasNavbar-expand-${expand}`}
                             style={{ background: "#808080" }}
@@ -73,7 +39,7 @@ const Top2 = () => {
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
                                     <Nav>
                                         <Link
-                                            to="/Donor_login"
+                                            to="/donorlogin"
                                             className="trans nav-link nav-link-ltr"
                                             smooth
                                             style={{ color: "white" }}
@@ -83,7 +49,17 @@ const Top2 = () => {
                                     </Nav>
                                     <Nav>
                                         <Link
-                                            to="/Donor_Register"
+                                            to="/needysignup"
+                                            className="trans nav-link nav-link-ltr"
+                                            smooth
+                                            style={{ color: "white" }}
+                                        >
+                                            Needy Register
+                                        </Link>
+                                    </Nav>
+                                    <Nav>
+                                        <Link
+                                            to="/donorregister"
                                             className="trans nav-link nav-link-ltr"
                                             smooth
                                             style={{ color: "white" }}
@@ -93,7 +69,7 @@ const Top2 = () => {
                                     </Nav>
                                     <Nav>
                                         <Link
-                                            to="/Hospital_login"
+                                            to="/hospitallogin"
                                             className="trans nav-link nav-link-ltr"
                                             smooth
                                             style={{ color: "white" }}

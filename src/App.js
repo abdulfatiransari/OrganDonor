@@ -25,12 +25,12 @@ function App() {
                 <Routes>
                     <Route exact path="/" element={<Home />} />
                     <Route exact path="/login" element={<Landingpage />} />
-                    <Route exact path="/Donor_Register" element={<Loginsignup />} />
-                    <Route exact path="/Needy_signup" element={<Needysignup />} />
-                    <Route exact path="/Hospital_login" element={<Hospitallogin />} />
-                    <Route exact path="/Donor_login" element={<Donorlogin />} />
+                    <Route exact path="/donorregister" element={<Loginsignup />} />
+                    <Route exact path="/needysignup" element={<Needysignup />} />
+                    <Route exact path="/hospitallogin" element={<Hospitallogin />} />
+                    <Route exact path="/donorlogin" element={<Donorlogin />} />
                     {/* dummy */}
-                    <Route exact path="/Main_page" element={<Mainpage />} />
+                    <Route exact path="/dashboard" element={<Mainpage />} />
                     {/* <Route
                     exact
                     path="/Main_page"
@@ -38,11 +38,11 @@ function App() {
                         window.localStorage.getItem("isAuthenticated") ? (
                             <Mainpage />
                         ) : (
-                            <Navigate to="/Hospital_login" />
+                            <Navigate to="/hospitallogin" />
                         )
                     }
                 /> */}
-                    <Route exact path="/Approve_donor" element={<ApproveDonor />} />
+                    <Route exact path="/dashboard/approvedonor" element={<ApproveDonor />} />
                     {/* <Route
                     exact
                     path="/Approve_donor"
@@ -50,7 +50,7 @@ function App() {
                         window.localStorage.getItem("isAuthenticated") ? (
                             <ApproveDonor />
                         ) : (
-                            <Navigate to="/Hospital_login" />
+                            <Navigate to="/hospitallogin" />
                         )
                     }
                 /> */}
@@ -62,11 +62,11 @@ function App() {
                         window.localStorage.getItem("isAuthenticated") ? (
                             <PatientRecord />
                         ) : (
-                            <Navigate to="/Hospital_login" />
+                            <Navigate to="/hospitallogin" />
                         )
                     }
                 /> */}
-                    <Route exact path="/RegisterRecipient" element={<RegisterRecipient />} />
+                    <Route exact path="/dashboard/registerrecipient" element={<RegisterRecipient />} />
                     {/* <Route
                     exact
                     path="/RegisterRecipient"
@@ -74,11 +74,11 @@ function App() {
                         window.localStorage.getItem("isAuthenticated") ? (
                             <RegisterRecipient />
                         ) : (
-                            <Navigate to="/Hospital_login" />
+                            <Navigate to="/hospitallogin" />
                         )
                     }
                 /> */}
-                    <Route exact path="/Transplant_match" element={<TransplantMatch />} />
+                    <Route exact path="/dashboard/transplantmatch" element={<TransplantMatch />} />
                     {/* <Route
                     exact
                     path="/Transplant_match"
@@ -86,7 +86,7 @@ function App() {
                         window.localStorage.getItem("isAuthenticated") ? (
                             <TransplantMatch />
                         ) : (
-                            <Navigate to="/Hospital_login" />
+                            <Navigate to="/hospitallogin" />
                         )
                     }
                 /> */}

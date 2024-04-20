@@ -54,12 +54,12 @@ const About = () => {
             <div className="initiate">To be a part of this initiative</div>
             <div className="list-button">
                 <center>
-                    <Link to="/Donor_Register" className="btn btn-primary button-71">
+                    <Link to="/donorregister" className="btn btn-primary button-71">
                         Register as Donor
                     </Link>
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-                    <Link to="/Needy_signup" className="btn btn-primary button-71">
+                    <Link to="/needysignup" className="btn btn-primary button-71">
                         Register as Needy
                     </Link>
                 </center>

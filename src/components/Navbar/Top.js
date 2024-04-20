@@ -20,34 +20,6 @@ const Top = () => {
 
     return (
         <>
-            {/* <Navbar
-                position="sticky"
-                className={fix ? "navbar fixed" : "navbar initial"}
-                style={{ backgroundColor: "#00000080" }}
-            >
-                <Container className="trans">
-                    <Link to="#courous" className="trans nav-link nav-link-ltr head" smooth style={{ color: "white" }}>
-                        Organ-Chain
-                    </Link>
-                    <Nav className="me-auto trans">
-                        <Link to="#about" className="trans nav-link nav-link-ltr" smooth style={{ color: "white" }}>
-                            About Us
-                        </Link>
-                        <Link to="#success" className="trans nav-link nav-link-ltr" smooth style={{ color: "white" }}>
-                            Success Stories
-                        </Link>
-                        <Link to="#partner" className="trans nav-link nav-link-ltr" style={{ color: "white" }}>
-                            Partner with us
-                        </Link>
-                    </Nav>
-                    <Nav className="trans">
-                        <Link to="/Donor_login" className="button-70" href="#pricing">
-                            {" "}
-                            Login/Signup
-                        </Link>
-                    </Nav>
-                </Container>
-            </Navbar> */}
             {["lg"].map((expand) => (
                 <Navbar key={expand} expand={expand} className="mb-3" style={{ backgroundColor: "#00000080" }}>
                     <Container fluid>
@@ -104,7 +76,7 @@ const Top = () => {
                                         Partner with us
                                     </Nav.Link>
                                     <Nav>
-                                        <Link to="/Donor_login" className="button-70" smooth style={{ color: "white" }}>
+                                        <Link to="/donorlogin" className="button-70" smooth style={{ color: "white" }}>
                                             Login/Signup
                                         </Link>
                                     </Nav>

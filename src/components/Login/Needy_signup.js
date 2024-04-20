@@ -76,10 +76,10 @@ function Needy_signup() {
             <div style={{ background: "#000000", minHeight: "100vh" }}>
                 <Top2 />
                 <div className="login">
-                    <div className="form_wrapper">
+                    <div className="form_wrapper" style={{ background: "#00000080" }}>
                         <div className="form_container">
                             <div className="title_container">
-                                <h2>Organ Recipient Signup</h2>
+                                <h2 style={{ color: "white" }}>Organ Recipient Signup</h2>
                             </div>
                             <div className="row clearfix">
                                 <div className="">
@@ -194,6 +194,7 @@ function Needy_signup() {
                                                 placeholder="weight(in kg)"
                                                 required
                                                 onChange={onChange}
+                                                style={{ width: "100%" }}
                                             />
                                         </div>
                                         <div className="input_field">
@@ -203,6 +204,7 @@ function Needy_signup() {
                                                 placeholder="height(in cm)"
                                                 required
                                                 onChange={onChange}
+                                                style={{ width: "100%" }}
                                             />
                                         </div>
 

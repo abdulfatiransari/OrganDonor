@@ -1,7 +1,14 @@
 .testimonials-section {
     text-align: center;
     padding: 40px 60px;
-    background-color: #f8f8f8;
+    background-color: #000000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media (min-width: 425px) {
+        padding: 20px 20px;
+    }
 }
 
 .testimonials-heading {
@@ -11,7 +18,6 @@
 }
 
 .testimonials-subheading {
-
     color: #333;
     font-size: 32px;
     font-weight: bold;
@@ -26,9 +32,9 @@
 
 .testimonial-item {
     width: 320px;
-    background-color: #fff;
+    background-color: #f8f8f8;
     border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(255, 255, 255, 100);
     padding: 20px;
     margin: 10px;
     transition: box-shadow 0.3s ease;

@@ -20,43 +20,49 @@ function Hospital_nav() {
                 <SideNav.Nav defaultSelected="home">
                     <NavItem eventKey="home">
                         <NavIcon>
-                            <i className="fa fa-fw fa-home" style={{ fontSize: "1.75em" }}></i>
+                            <NavLink to="/dashboard">
+                                <i className="fa fa-fw fa-home" style={{ fontSize: "1.75em" }}></i>
+                            </NavLink>
                         </NavIcon>
                         <NavText>
-                            <NavLink to="/Main_page">Home</NavLink>
+                            <NavLink to="/dashboard">Home</NavLink>
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="approve_donor">
                         <NavIcon>
-                            <NavLink to="/Approve_donor">
+                            <NavLink to="/dashboard/approvedonor">
                                 <i className="fa fa-fw fa-check" style={{ fontSize: "1.75em" }} />
                             </NavLink>
                         </NavIcon>
                         <NavText>
-                            <NavLink to="/Approve_donor">Approve_donor</NavLink>
+                            <NavLink to="/dashboard/approvedonor">Approve_donor</NavLink>
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="register_recipient">
                         <NavIcon>
-                            <NavLink to="/RegisterRecipient">
+                            <NavLink to="/dashboard/registerrecipient">
                                 <i className="fa fa-fw fa-heart" style={{ fontSize: "1.75em" }} />
                             </NavLink>
                         </NavIcon>
                         <NavText>
-                            <NavLink to="/RegisterRecipient">Register Recipient</NavLink>
+                            <NavLink to="/dashboard/registerrecipient">Register Recipient</NavLink>
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="Transplant Match">
                         <NavIcon>
-                            <i className="fa fa-fw fa-key" style={{ fontSize: "1.75em" }} />
+                            <NavLink to="/dashboard/transplantmatch">
+                                <i className="fa fa-fw fa-key" style={{ fontSize: "1.75em" }} />
+                            </NavLink>
                         </NavIcon>
                         <NavText>
-                            <NavLink to="/Transplant_match">Transplant Match</NavLink>
+                            <NavLink to="/dashboard/transplantmatch">Transplant Match</NavLink>
                         </NavText>
                     </NavItem>
                     <NavItem eventKey="Logout">
                         <NavIcon>
-                            <i className="fa fa-fw fa-sign-out" style={{ fontSize: "1.75em" }} onClick={logout} />
+                            <NavLink onClick={logout}>
+                                <i className="fa fa-fw fa-sign-out" style={{ fontSize: "1.75em" }} onClick={logout} />
+                            </NavLink>
                         </NavIcon>
                         <NavText>
                             <NavLink onClick={logout}>Logout </NavLink>
