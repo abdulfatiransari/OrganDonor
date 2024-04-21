@@ -32,7 +32,7 @@ const Hospital_login = () => {
                     });
                     console.log({ ...firebaseuser.data(), id: firebaseuser.id });
                     console.log("success");
-                    navigate("/");
+                    navigate("/dashboard");
                 }
             })
             .catch((err) => setErrMsg(err.message));
@@ -59,7 +59,7 @@ const Hospital_login = () => {
                             <div className="row gx-lg-5 align-items-center">
                                 <div className="col-lg-6 mb-5 mb-lg-0">
                                     <h1 className="my-5 display-3 fw-bold ls-tight">
-                                        <span className="text-primary">Signup For hospital Login</span>
+                                        <span className="text-primary">Login For hospital</span>
                                     </h1>
                                     <p style={{ color: "hsl(217, 10%, 50.8%)" }}>
                                         "Organ donation is an act of extraordinary generosity, kindness and humanity. It
@@ -106,7 +106,7 @@ const Hospital_login = () => {
                                                 </div>
 
                                                 <button type="submit" className="btn btn-primary btn-block mb-4">
-                                                    Sign up
+                                                    Login
                                                 </button>
                                             </form>
                                             {errMsg && errMsg.length > 0 ? (

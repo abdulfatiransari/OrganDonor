@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const sha3 = require("js-sha3");
 const { toChecksumAddress } = require("ethereumjs-util");
 
-class Donor_login extends Component {
+class Needy_login extends Component {
     state = {
         public_key: "",
         errMsg: "",
@@ -90,7 +90,7 @@ class Donor_login extends Component {
                                         <h1 class="my-5 display-3 fw-bold ls-tight">
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span class="text-primary">Check Donor Info and Status</span>
+                                            <span class="text-primary">Check Needy Info and Status</span>
                                         </h1>
                                         <p style={{ color: "hsl(219, 10%, 50.8%)", fontSize: "15px" }}>
                                             “I never used to pay that much attention to organ donation, but I’m
@@ -123,12 +123,12 @@ class Donor_login extends Component {
                                                         class="btn btn-primary btn-block mb-4"
                                                         onSubmit={this.onSubmit}
                                                     >
-                                                        Sign up
+                                                        Login
                                                     </button>
                                                     <div>
                                                         <p>
                                                             Don't have an account?{" "}
-                                                            <Link to="/donorregister">Signup</Link>{" "}
+                                                            <Link to="/needyregister">Signup</Link>{" "}
                                                         </p>
                                                     </div>
                                                     {this.state.errMsg && (
@@ -183,4 +183,4 @@ class Donor_login extends Component {
         );
     }
 }
-export default Donor_login;
+export default Needy_login;

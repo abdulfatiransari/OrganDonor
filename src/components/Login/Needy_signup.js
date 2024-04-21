@@ -9,6 +9,7 @@ import { auth } from "../../utils/firebase";
 import addUser from "../../api/addUser";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context";
+import { Link } from "react-router-dom";
 
 function Needy_signup() {
     const [signIn, toggle] = useState(true);
@@ -211,6 +212,11 @@ function Needy_signup() {
                                         <Front />
                                         <input className="button" type="submit" value="Register" />
                                     </form>
+                                    <div>
+                                        <p style={{ color: "white" }}>
+                                            Already have an account? <Link to="/needylogin"> Login</Link>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

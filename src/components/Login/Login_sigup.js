@@ -8,6 +8,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../utils/firebase";
 import addUser from "../../api/addUser";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const DonorSignUp = () => {
     const [state, setState] = useState({
@@ -213,6 +214,11 @@ const DonorSignUp = () => {
                                             </div>
 
                                             <input className="button" type="submit" value="Register" />
+                                            <div>
+                                                <p style={{ color: "white" }}>
+                                                    Already have an account? <Link to="/donorlogin"> Login</Link>
+                                                </p>
+                                            </div>
 
                                             {state.errMsg && state.errMsg.length > 0 ? (
                                                 <Message error header="Oops!!" content={state.errMsg} />

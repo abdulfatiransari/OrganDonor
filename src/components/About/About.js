@@ -59,7 +59,7 @@ const About = () => {
                     </Link>
                     &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
-                    <Link to="/needysignup" className="btn btn-primary button-71">
+                    <Link to="/needyregister" className="btn btn-primary button-71">
                         Register as Needy
                     </Link>
                 </center>

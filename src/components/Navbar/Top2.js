@@ -37,7 +37,7 @@ const Top2 = () => {
                             </Offcanvas.Header>
                             <Offcanvas.Body>
                                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                                    <Nav>
+                                    {/* <Nav>
                                         <Link
                                             to="/donorlogin"
                                             className="trans nav-link nav-link-ltr"
@@ -46,25 +46,25 @@ const Top2 = () => {
                                         >
                                             Donor Info
                                         </Link>
-                                    </Nav>
+                                    </Nav> */}
                                     <Nav>
                                         <Link
-                                            to="/needysignup"
+                                            to="/needylogin"
                                             className="trans nav-link nav-link-ltr"
                                             smooth
                                             style={{ color: "white" }}
                                         >
-                                            Needy Register
+                                            Needy Login
                                         </Link>
                                     </Nav>
                                     <Nav>
                                         <Link
-                                            to="/donorregister"
+                                            to="/donorlogin"
                                             className="trans nav-link nav-link-ltr"
                                             smooth
                                             style={{ color: "white" }}
                                         >
-                                            Donor Register
+                                            Donor Login
                                         </Link>
                                     </Nav>
                                     <Nav>
