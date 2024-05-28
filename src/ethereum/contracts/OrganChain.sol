@@ -1,4 +1,5 @@
-pragma solidity >=0.4.22;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
 
 contract OrganChain {
     struct Recipient {
@@ -151,6 +152,7 @@ contract OrganChain {
                 Recipients[Hospital_Recipients[_hospital_addr][i]].bloodgroup
             );
         }
+        revert("Recipient not found");
     }
 
     function isMatchFound(address _recipient_addr) public view returns (bool) {
@@ -171,6 +173,7 @@ contract OrganChain {
             if (_address == recipient_arr[j])
                 return (Recipients[recipient_arr[j]].EMRHash);
         }
+        return "";
     }
 
     function transplantMatch(address _recipient_addr) public {

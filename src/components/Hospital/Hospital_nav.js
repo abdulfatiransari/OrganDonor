@@ -1,14 +1,46 @@
 import "@fortawesome/fontawesome-svg-core";
 import SideNav, { NavIcon, NavItem, NavText } from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
-import React from "react";
+import React, { useContext, useState } from "react";
 import "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "./main.css";
+import { AuthContext } from "../Context";
+import Web3 from "web3";
 //import TransplantMatch from "./transplant-match";
 
 function Hospital_nav() {
+    const [loading, setLoading] = useState(false);
+    const { address, setAddress } = useContext(AuthContext);
+
+    const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text);
+        alert("Wallet Address copied!");
+    };
+
+    const onPressConnect = async () => {
+        setLoading(true);
+        try {
+            if (window?.ethereum) {
+                // Desktop browser
+                const accounts = await window.ethereum.request({
+                    method: "eth_requestAccounts",
+                });
+
+                const account = Web3.utils.toChecksumAddress(accounts[0]);
+                setAddress(account);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+        setLoading(false);
+    };
+
+    const onPressLogout = () => setAddress("");
+
     const logout = (event) => {
+        onPressLogout();
         window.localStorage.removeItem("isAuthenticated");
         window.localStorage.removeItem("token");
         window.location = "/";
@@ -68,6 +100,31 @@ function Hospital_nav() {
                             <NavLink onClick={logout}>Logout </NavLink>
                         </NavText>
                     </NavItem>
+                    <NavItem onClick={onPressConnect}>
+                        <NavIcon>
+                            <NavLink to="#">
+                                <i className="fa fa-fw fa-key" style={{ fontSize: "1.75em" }} />
+                            </NavLink>
+                        </NavIcon>
+                        <NavText>
+                            <NavLink to="#">{address ? "Connected" : "Connect Wallet"}</NavLink>
+                        </NavText>
+                    </NavItem>
+                    {address && (
+                        <NavItem onClick={() => copyToClipboard(address)}>
+                            <NavIcon>
+                                <NavLink to="#">
+                                    <i className="fa fa-fw fa-copy" style={{ fontSize: "1.75em" }} />
+                                </NavLink>
+                            </NavIcon>
+                            <NavText>
+                                <NavLink to="#">{`${address.slice(0, 8)}..${address.slice(
+                                    address.length - 8,
+                                    address.length
+                                )}`}</NavLink>
+                            </NavText>
+                        </NavItem>
+                    )}
                 </SideNav.Nav>
             </SideNav>
         </>

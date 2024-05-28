@@ -6,6 +6,8 @@ import contract from "../../ethereum/web3";
 import "react-bootstrap";
 import "./card.css";
 import { Link } from "react-router-dom";
+import { ethers } from "ethers";
+import TokenABI from "../../ethereum/abi.json";
 const sha3 = require("js-sha3");
 const { toChecksumAddress } = require("ethereumjs-util");
 
@@ -36,19 +38,14 @@ class Needy_login extends Component {
         const checksumAddress = toChecksumAddress(address);
 
         if (typeof window.ethereum !== "undefined") {
-            // Request the user's permission to connect to MetaMask
-            await window.ethereum.request({ method: "eth_requestAccounts" });
-
-            // Use MetaMask as the web3 provider
-            const web3 = new Web3(window.ethereum);
-
-            // Get the user's account
-            const accounts = await web3.eth.getAccounts();
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const gasPrice = await signer.getGasPrice();
+            const tokenContract = new ethers.Contract("0x8bfd099363c2EC5a386DeC6071b9724A472cc9B0", TokenABI, signer);
 
             try {
-                contract.methods
+                tokenContract
                     .getDonor(checksumAddress)
-                    .call()
                     .then((result) => {
                         const ipfsHash = result[0];
                         const organ = result[1];

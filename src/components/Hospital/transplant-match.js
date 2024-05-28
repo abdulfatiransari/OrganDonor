@@ -5,12 +5,16 @@ import Web3 from "web3";
 import RenderList from "./render-list";
 import { Header, Divider, Grid, Button } from "semantic-ui-react";
 import HospitalNav from "./Hospital_nav";
+import { ethers } from "ethers";
+import TokenABI from "../../ethereum/abi.json";
 
 const TransplantMatch = () => {
     const [recipientArr, setRecipientArr] = useState([]);
     const [loading, setLoading] = useState(true);
     const [errMsg, setErrMsg] = useState("");
     const [recipientCount, setRecipientCount] = useState(0);
+
+    const tokenContractAddress = "0x8bfd099363c2EC5a386DeC6071b9724A472cc9B0";
 
     const onCheck = async (event) => {
         const token = localStorage.getItem("token");
@@ -19,16 +23,16 @@ const TransplantMatch = () => {
 
         if (typeof window.ethereum !== "undefined") {
             try {
-                await window.ethereum.request({ method: "eth_requestAccounts" });
-                const web3 = new Web3(window.ethereum);
-                const accounts = await web3.eth.getAccounts();
-                const account = accounts[0];
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
+                const signer = provider.getSigner();
+                const gasPrice = await signer.getGasPrice();
+                const tokenContract = new ethers.Contract(tokenContractAddress, TokenABI, signer);
 
-                const result = await contract.methods.getRecipientCount(hospitalId).call();
+                const result = await tokenContract.getRecipientCount(hospitalId);
                 const newRecipientArr = [];
 
                 for (let i = 0; i < result[0]; i++) {
-                    const recipient = await contract.methods.getRecipientDetail(hospitalId, i).call();
+                    const recipient = await tokenContract.getRecipientDetail(hospitalId, i);
 
                     if (recipient[1] === "") {
                         continue;

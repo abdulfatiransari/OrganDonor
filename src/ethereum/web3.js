@@ -1,15 +1,15 @@
 import Web3 from "web3";
-import configurations from "./build/contracts/OrganChain.json";
+import configurations from "./abi.json";
 
-const contractAddress = configurations.networks["5777"].address;
-const contractABI = configurations.abi;
+// const contractAddress = configurations.networks["5777"].address;
+const contractAddress = "0x8bfd099363c2EC5a386DeC6071b9724A472cc9B0";
+const contractABI = configurations;
 const web3 = new Web3(Web3.givenProvider || "http://127.0.0.1:7545");
 const contract = new web3.eth.Contract(contractABI, contractAddress);
 
 export default contract;
 
 // const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-
 
 // const contractAddress = '0x32B4f1FE3c24dC1c58fF0363C7052ADAcD2454c6';
 // const contractAbi = [
@@ -285,6 +285,5 @@ export default contract;
 // ];
 
 // const myContract = new web3.eth.Contract(contractAbi, contractAddress);
-
 
 // export default myContract;

@@ -5,6 +5,8 @@ import jwtDecode from "jwt-decode";
 
 import contract from "../../ethereum/web3";
 import Web3 from "web3";
+import { ethers } from "ethers";
+import TokenABI from "../../ethereum/abi.json";
 
 const sha3 = require("js-sha3");
 const { toChecksumAddress } = require("ethereumjs-util");
@@ -14,7 +16,7 @@ const RegisterRecipient = () => {
         fname: "",
         lname: "",
         gender: "Male",
-        city: "Gwalior",
+        city: "Karachi",
         phone: "",
         email: "",
         bloodgroup: "A+",
@@ -28,6 +30,53 @@ const RegisterRecipient = () => {
         successMsg: "",
     });
 
+    const tokenContractAddress = "0x8bfd099363c2EC5a386DeC6071b9724A472cc9B0";
+
+    // const onSubmit = async (event) => {
+    //     event.preventDefault();
+    //     setFormData({ ...formData, loading: true, errMsg: "", successMsg: "" });
+
+    //     const { fname, lname, gender, city, phone, email, bloodgroup, organ, publicKey } = formData;
+
+    //     if (typeof window.ethereum !== "undefined") {
+    //         await window.ethereum.request({ method: "eth_requestAccounts" });
+    //         const web3 = new Web3(window.ethereum);
+    //         const accounts = await web3.eth.getAccounts();
+    //         const account = accounts[0];
+    //         try {
+    //             const data = JSON.stringify({ fname, lname, gender, city, phone, email });
+    //             const buf = Buffer.from(data);
+    //             var result = "Qm1d4";
+    //             var result1 = "Qm1d";
+    //             setFormData({ ...formData, EMRHash: result });
+
+    //             const hash = sha3.keccak256(formData.publicKey);
+    //             const addressBytes = hash.slice(-20);
+    //             const address = "0x" + Buffer.from(addressBytes).toString("hex");
+    //             const checksumAddress = toChecksumAddress(address);
+
+    //             // const token = localStorage.getItem("token");
+    //             // console.log("🚀 ~ onSubmit ~ token:", token);
+    //             // const decodedToken = jwtDecode(token);
+    //             // console.log("🚀 ~ onSubmit ~ decodedToken:", decodedToken);
+    //             // const hospitalid = decodedToken.key;
+    //             // console.log("🚀 ~ onSubmit ~ hospitalid:", hospitalid);
+
+    //             await contract.methods
+    //                 .addRecipient(checksumAddress, checksumAddress, result, result1, organ, bloodgroup)
+    //                 .send({
+    //                     from: account,
+    //                     gas: 1000000,
+    //                 });
+    //             setFormData({ ...formData, successMsg: "Repient Registered Successfully!", loading: false });
+    //         } catch (err) {
+    //             setFormData({ ...formData, errMsg: "Cannot send data already present user", loading: false });
+    //         }
+    //     } else {
+    //         alert("Please install MetaMask to use this dApp");
+    //     }
+    // };
+
     const onSubmit = async (event) => {
         event.preventDefault();
         setFormData({ ...formData, loading: true, errMsg: "", successMsg: "" });
@@ -35,14 +84,14 @@ const RegisterRecipient = () => {
         const { fname, lname, gender, city, phone, email, bloodgroup, organ, publicKey } = formData;
 
         if (typeof window.ethereum !== "undefined") {
-            await window.ethereum.request({ method: "eth_requestAccounts" });
-            const web3 = new Web3(window.ethereum);
-            const accounts = await web3.eth.getAccounts();
-            const account = accounts[0];
-
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const signer = provider.getSigner();
+            const gasPrice = await signer.getGasPrice();
+            const tokenContract = new ethers.Contract(tokenContractAddress, TokenABI, signer);
             try {
                 const data = JSON.stringify({ fname, lname, gender, city, phone, email });
                 const buf = Buffer.from(data);
+                console.log("🚀 ~ onSubmit ~ buf:", buf);
                 var result = "Qm1d4";
                 var result1 = "Qm1d";
                 setFormData({ ...formData, EMRHash: result });
@@ -52,18 +101,18 @@ const RegisterRecipient = () => {
                 const address = "0x" + Buffer.from(addressBytes).toString("hex");
                 const checksumAddress = toChecksumAddress(address);
 
-                const token = localStorage.getItem("token");
-                const decodedToken = jwtDecode(token);
-                const hospitalid = decodedToken.key;
-
-                await contract.methods
-                    .addRecipient(checksumAddress, hospitalid, result, result1, organ, bloodgroup)
-                    .send({
-                        from: account,
-                        gas: 1000000,
-                    });
+                const addRecepient = await tokenContract.addRecipient(
+                    checksumAddress,
+                    checksumAddress,
+                    result,
+                    result1,
+                    organ,
+                    bloodgroup
+                );
+                console.log(addRecepient);
                 setFormData({ ...formData, successMsg: "Repient Registered Successfully!", loading: false });
             } catch (err) {
+                console.log(err);
                 setFormData({ ...formData, errMsg: "Cannot send data already present user", loading: false });
             }
         } else {
@@ -219,9 +268,9 @@ const RegisterRecipient = () => {
                                     control="select"
                                     required
                                 >
-                                    <option value="Gwalior">Gwalior</option>
-                                    <option value="New Delhi">New Delhi</option>
-                                    <option value="Pune">Pune</option>
+                                    <option value="Karachi">Karachi</option>
+                                    <option value="Lahore">Lahore</option>
+                                    <option value="Islamabad">Islamabad</option>
                                 </Form.Field>
                             </Form.Group>
                             <Form.Group widths={2}>
