@@ -14,7 +14,7 @@ const TransplantMatch = () => {
     const [errMsg, setErrMsg] = useState("");
     const [recipientCount, setRecipientCount] = useState(0);
 
-    const tokenContractAddress = "0x8bfd099363c2EC5a386DeC6071b9724A472cc9B0";
+    const tokenContractAddress = "0xa7a377343Ded512c623C905998604537653743a4";
 
     const onCheck = async (event) => {
         const token = localStorage.getItem("token");
@@ -126,8 +126,6 @@ const TransplantMatch = () => {
             setErrMsg("Error caught: " + err);
         }
     };
-
-    console.log(recipientArr);
 
     const renderList = () => {
         return (

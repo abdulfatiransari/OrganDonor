@@ -16,6 +16,9 @@ const ApproveDonor = () => {
         fname: "",
         lname: "",
         email: "",
+        gender: "Male",
+        city: "Karachi",
+        phone: "",
         donorId: "",
         loading: false,
         errMsg: "",
@@ -28,14 +31,14 @@ const ApproveDonor = () => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
 
-    const tokenContractAddress = "0x8bfd099363c2EC5a386DeC6071b9724A472cc9B0";
+    const tokenContractAddress = "0xa7a377343Ded512c623C905998604537653743a4";
 
     const onApprove = async (event) => {
         event.preventDefault();
 
         setFormData({ ...formData, errMsg: "", successMsg: "" });
 
-        const { fname, lname, email, bloodgroup, organ, donorId } = formData;
+        const { fname, lname, email, gender, city, phone, bloodgroup, organ, donorId } = formData;
 
         try {
             if (typeof window.ethereum !== "undefined") {
@@ -49,20 +52,26 @@ const ApproveDonor = () => {
                 // const { gender, city, phone, organ, bloodgroup } = res.data;
                 // const data = JSON.stringify({ fname, lname, gender, city, phone, email });
 
-                var result = "563jhjh";
-                setFormData({ ...formData, ipfsHash: result });
-                result = "435353";
-                setFormData({ ...formData, EMRHash: result });
+                // var result = "563jhjh";
+                // setFormData({ ...formData, ipfsHash: result });
+                // result = "435353";
+                // setFormData({ ...formData, EMRHash: result });
 
-                const hash = sha3.keccak256(formData.donorId);
-                const addressBytes = hash.slice(-20);
-                const address = "0x" + Buffer.from(addressBytes).toString("hex");
-                const checksumAddress = toChecksumAddress(address);
-
+                // const hash = sha3.keccak256(formData.donorId);
+                // const addressBytes = hash.slice(-20);
+                // const address = "0x" + Buffer.from(addressBytes).toString("hex");
+                // const checksumAddress = toChecksumAddress(address);
+                console.log(donorId, fname, lname, gender, city, phone, email, organ, bloodgroup);
                 const addDonor = await tokenContract.addDonor(
-                    checksumAddress,
-                    formData.ipfsHash || "retjytjygjgjh",
-                    formData.EMRHash || "dhggfjjg",
+                    donorId,
+                    fname,
+                    lname,
+                    gender,
+                    city,
+                    phone,
+                    email,
+                    // formData.ipfsHash || "retjytjygjgjh",
+                    // formData.EMRHash || "dhggfjjg",
                     organ,
                     bloodgroup
                 );
@@ -212,31 +221,43 @@ const ApproveDonor = () => {
                         </Header>
                         <Divider />
                         <Form onSubmit={onApprove} error={!!formData.errMsg}>
-                            <Form.Input
-                                value={formData.fname}
-                                onChange={onChange}
-                                name="fname"
-                                label="First Name"
-                                placeholder="First Name"
-                                required
-                            />
-                            <Form.Input
-                                value={formData.lname}
-                                onChange={onChange}
-                                name="lname"
-                                label="Last Name"
-                                placeholder="Last Name"
-                                required
-                            />
-                            <Form.Input
-                                value={formData.email}
-                                onChange={onChange}
-                                name="email"
-                                label="Email"
-                                placeholder="Email"
-                                type="email"
-                                required
-                            />
+                            <Form.Group widths={2}>
+                                <Form.Input
+                                    value={formData.fname}
+                                    onChange={onChange}
+                                    name="fname"
+                                    label="First Name"
+                                    placeholder="First Name"
+                                    required
+                                />
+                                <Form.Input
+                                    value={formData.lname}
+                                    onChange={onChange}
+                                    name="lname"
+                                    label="Last Name"
+                                    placeholder="Last Name"
+                                    required
+                                />
+                            </Form.Group>
+                            <Form.Group widths={2}>
+                                <Form.Input
+                                    value={formData.email}
+                                    onChange={onChange}
+                                    name="email"
+                                    label="Email"
+                                    placeholder="Email"
+                                    type="email"
+                                    required
+                                />
+                                <Form.Input
+                                    value={formData.phone}
+                                    onChange={onChange}
+                                    name="phone"
+                                    label="Phone"
+                                    placeholder="123456789"
+                                    required
+                                />
+                            </Form.Group>
                             <Form.Input
                                 value={formData.donorId}
                                 onChange={onChange}
@@ -245,6 +266,32 @@ const ApproveDonor = () => {
                                 placeholder="0x"
                                 required
                             />
+                            <Form.Group widths={2}>
+                                <Form.Field
+                                    value={formData.gender}
+                                    onChange={onChange}
+                                    name="gender"
+                                    label="Gender"
+                                    control="select"
+                                    required
+                                >
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </Form.Field>
+                                <Form.Field
+                                    value={formData.city}
+                                    onChange={onChange}
+                                    name="city"
+                                    label="City"
+                                    control="select"
+                                    required
+                                >
+                                    <option value="Karachi">Karachi</option>
+                                    <option value="Lahore">Lahore</option>
+                                    <option value="Islamabad">Islamabad</option>
+                                </Form.Field>
+                            </Form.Group>
                             <Form.Group widths={2}>
                                 <Form.Field
                                     value={formData.bloodgroup}

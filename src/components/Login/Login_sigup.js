@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Top2 from "../Navbar/Top2";
 import { Message } from "semantic-ui-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,8 +9,11 @@ import { auth } from "../../utils/firebase";
 import addUser from "../../api/addUser";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Context";
+import Front from "../front/Front";
 
 const DonorSignUp = () => {
+    const { address } = useContext(AuthContext);
     const [state, setState] = useState({
         fname: "",
         lname: "",
@@ -32,6 +35,11 @@ const DonorSignUp = () => {
         setState((prevState) => ({ ...prevState, errMsg: "" }));
 
         try {
+            if (!address) {
+                console.log("wallet connect first");
+                alert("Wallet Connect First");
+                return;
+            }
             const { fname, lname, gender, city, phone, email, bloodgroup, organ, pass } = state;
             createUserWithEmailAndPassword(auth, email, pass).then(async ({ user }) => {
                 await addUser({
@@ -44,7 +52,9 @@ const DonorSignUp = () => {
                     bloodgroup: bloodgroup,
                     organ: organ,
                     phone: phone,
-                    donorType: "OrganDonor",
+                    type: "donor",
+                    status: false,
+                    wallet: address,
                     reloadUserInfo: user.reloadUserInfo,
                     uid: user.uid,
                 });
@@ -212,6 +222,22 @@ const DonorSignUp = () => {
                                                     <option value="Kidney">Kidney</option>
                                                 </select>
                                             </div>
+                                            {address && (
+                                                <div style={{ marginBottom: "10px" }}>
+                                                    <p
+                                                        style={{
+                                                            color: "white",
+                                                            display: "flex",
+                                                            justifyContent: "center",
+                                                        }}
+                                                    >{`${address.slice(0, 6)}...${address.slice(
+                                                        address.length - 6,
+                                                        address.length
+                                                    )}`}</p>
+                                                </div>
+                                            )}
+
+                                            <Front />
 
                                             <input className="button" type="submit" value="Register" />
                                             <div>

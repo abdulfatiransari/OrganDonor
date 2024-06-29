@@ -1,5 +1,122 @@
 [
     {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "donorAddress",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "firstname",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "lastname",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "organ",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "bloodgroup",
+                "type": "string"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "addedBy",
+                "type": "address"
+            }
+        ],
+        "name": "DonorAdded",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "recipientAddress",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "hospitalAddress",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "firstname",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "lastname",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "organ",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "bloodgroup",
+                "type": "string"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "addedBy",
+                "type": "address"
+            }
+        ],
+        "name": "RecipientAdded",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "recipientAddress",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "donorAddress",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "matchedBy",
+                "type": "address"
+            }
+        ],
+        "name": "TransplantMatch",
+        "type": "event"
+    },
+    {
         "inputs": [
             {
                 "internalType": "address",
@@ -8,12 +125,32 @@
             },
             {
                 "internalType": "string",
-                "name": "_ipfsHash",
+                "name": "_first_name",
                 "type": "string"
             },
             {
                 "internalType": "string",
-                "name": "_EMRHash",
+                "name": "_last_name",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_gender",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_city",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_phone",
+                "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "_email",
                 "type": "string"
             },
             {
@@ -46,12 +183,32 @@
             },
             {
                 "internalType": "string",
-                "name": "_ipfsHash",
+                "name": "_first_name",
                 "type": "string"
             },
             {
                 "internalType": "string",
-                "name": "_EMRHash",
+                "name": "_last_name",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_gender",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_city",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_phone",
+                "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "_email",
                 "type": "string"
             },
             {
@@ -66,19 +223,6 @@
             }
         ],
         "name": "addRecipient",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "_recipient_addr",
-                "type": "address"
-            }
-        ],
-        "name": "transplantMatch",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -274,6 +418,19 @@
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "_recipient_addr",
+                "type": "address"
+            }
+        ],
+        "name": "transplantMatch",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     }
 ]

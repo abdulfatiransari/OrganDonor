@@ -1,183 +1,217 @@
-import { Component } from "react";
+import React, { useContext, useState } from "react";
 import Top2 from "../Navbar/Top2";
 import "./styles.css";
-import Web3 from "web3";
-import contract from "../../ethereum/web3";
 import "react-bootstrap";
 import "./card.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ethers } from "ethers";
 import TokenABI from "../../ethereum/abi.json";
-const sha3 = require("js-sha3");
-const { toChecksumAddress } = require("ethereumjs-util");
+import { AuthContext } from "../Context";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import getUser from "../../api/getUser";
+import { auth } from "../../utils/firebase";
 
-class Donor_login extends Component {
-    state = {
-        public_key: "",
-        errMsg: "",
-        ipfsHash: "",
-        organ: "",
-        bloodgroup: "",
-        matchfound: false,
-        matchid: "",
-    };
+const DonorLogin = () => {
+    const { setCurrentUser } = useContext(AuthContext);
+    const [publicKey, setPublicKey] = useState("");
+    const [errMsg, setErrMsg] = useState("");
+    const [donorDetails, setDonorDetails] = useState([]);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-    onSubmit = async (event) => {
+    const navigate = useNavigate();
+
+    const onSubmit = async (event) => {
         event.preventDefault();
-
-        const key = this.state.public_key;
-        const hash = sha3.keccak256(key);
-
-        // Take the rightmost 160 bits of the hash value
-        const addressBytes = hash.slice(-20);
-
-        // Convert the address bytes to a hexadecimal string
-        const address = "0x" + Buffer.from(addressBytes).toString("hex");
-
-        // Use ethereumjs-util to convert the address to checksum format
-        const checksumAddress = toChecksumAddress(address);
 
         if (typeof window.ethereum !== "undefined") {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
-            const gasPrice = await signer.getGasPrice();
-            const tokenContract = new ethers.Contract("0x8bfd099363c2EC5a386DeC6071b9724A472cc9B0", TokenABI, signer);
+            const tokenContract = new ethers.Contract("0xa7a377343Ded512c623C905998604537653743a4", TokenABI, signer);
 
             try {
-                await tokenContract
-                    .getDonor(checksumAddress)
-                    .then((result) => {
-                        const ipfsHash = result[0];
-                        const organ = result[1];
-                        const blood = result[2];
-                        const matchFound = result[3];
-                        const recipientId = result[4];
-                        this.setState({ ipfsHash: ipfsHash });
-                        this.setState({ organ: organ });
-                        this.setState({ bloodgroup: blood });
-                        this.setState({ matchfound: matchFound });
-                        this.setState({ matchid: recipientId });
-                    })
-                    .catch((err) => console.log(err));
+                const result = await tokenContract.getDonor(publicKey);
+                setDonorDetails(result);
+                console.log("🚀 ~ onSubmit ~ result:", result);
+                console.log("start donor login");
             } catch {
-                this.setState({ errMsg: "bad request" });
+                setErrMsg("bad request");
             }
         } else {
             alert("Please install MetaMask to use this dApp");
         }
     };
 
-    handleChange = (event) => {
-        this.setState({ [event.target.name]: event.target.value });
+    const handleChange = (event) => {
+        setPublicKey(event.target.value);
     };
 
-    render() {
-        return (
-            <>
-                <div style={{ background: "#000000", minHeight: "100vh" }}>
-                    <Top2 />
-                    <section class="hospital_login">
-                        <div
-                            class="px-4 py-5 px-md-5 text-center text-lg-start"
-                            // style={{ backgroundColor: "hsl(0, 0%, 96%)" }}
-                        >
-                            <div class="container">
-                                <div class="row gx-lg-5 align-items-center">
-                                    <div class="col-lg-6 mb-5 mb-lg-0">
-                                        <h1 class="my-5 display-3 fw-bold ls-tight">
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <span class="text-primary">Check Donor Info and Status</span>
-                                        </h1>
-                                        <p style={{ color: "hsl(219, 10%, 50.8%)", fontSize: "15px" }}>
-                                            “I never used to pay that much attention to organ donation, but I’m
-                                            tremendously glad for it: it turned out that I was one of the ones in need.
-                                            I hope my donor’s family will be blessed a thousand times for their
-                                            sacrifice.” –Karl Black
-                                        </p>
-                                    </div>
+    const onSubmit1 = (event) => {
+        event.preventDefault();
+        setErrMsg("");
 
-                                    <div class="col-lg-6 mb-5 mb-lg-0">
-                                        <div class="card">
-                                            <div class="card-body py-5 px-md-5">
-                                                <form onSubmit={this.onSubmit}>
-                                                    <div class="form-outline mb-4">
-                                                        <input
-                                                            type="string"
-                                                            id="public_key"
-                                                            name="public_key"
-                                                            class="form-control"
-                                                            value={this.state.public_key}
-                                                            onChange={this.handleChange}
-                                                            required
-                                                        />
-                                                        <label class="form-label" for="public_key">
-                                                            Public Key
-                                                        </label>
-                                                    </div>
-                                                    <button
-                                                        type="submit"
-                                                        class="btn btn-primary btn-block mb-4"
-                                                        onSubmit={this.onSubmit}
-                                                    >
-                                                        Sign up
-                                                    </button>
-                                                    <div>
-                                                        <p>
-                                                            Don't have an account?{" "}
-                                                            <Link to="/donorregister">Signup</Link>{" "}
-                                                        </p>
-                                                    </div>
-                                                    {this.state.errMsg && (
-                                                        <h3 className="error"> {this.state.errMsg} </h3>
-                                                    )}
-                                                </form>
-                                            </div>
+        const user = { email, password };
+
+        signInWithEmailAndPassword(auth, user.email, user.password)
+            .then(async ({ user }) => {
+                const firebaseuser = await getUser(user.uid);
+                if (firebaseuser) {
+                    setCurrentUser({
+                        ...firebaseuser.data(),
+                        id: firebaseuser.id,
+                    });
+                    console.log({ ...firebaseuser.data(), id: firebaseuser.id });
+                    console.log("success");
+                    navigate("/dashboard");
+                }
+            })
+            .catch((err) => setErrMsg(err.message));
+    };
+
+    const onChange = (event) => {
+        if (event.target.name === "email") {
+            setEmail(event.target.value);
+        } else if (event.target.name === "password") {
+            setPassword(event.target.value);
+        }
+    };
+
+    return (
+        <>
+            <div style={{ background: "#000000", minHeight: "100vh" }}>
+                <Top2 />
+                <section className="hospital_login">
+                    <div
+                        className="px-4 py-5 px-md-5 text-center text-lg-start"
+                        // style={{ backgroundColor: "hsl(0, 0%, 96%)" }}
+                    >
+                        <div className="container">
+                            <div className="row gx-lg-5 align-items-center">
+                                <div className="col-lg-6 mb-5 mb-lg-0">
+                                    <h1 className="my-5 display-3 fw-bold ls-tight">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span className="text-primary">Check Donor Info and Status</span>
+                                    </h1>
+                                    <p style={{ color: "hsl(219, 10%, 50.8%)", fontSize: "15px" }}>
+                                        “I never used to pay that much attention to organ donation, but I’m tremendously
+                                        glad for it: it turned out that I was one of the ones in need. I hope my donor’s
+                                        family will be blessed a thousand times for their sacrifice.” –Karl Black
+                                    </p>
+                                </div>
+
+                                <div className="col-lg-6 mb-5 mb-lg-0">
+                                    <div className="card">
+                                        <div className="card-body py-5 px-md-5">
+                                            <form onSubmit={onSubmit1} error={!!errMsg}>
+                                                <div className="form-outline mb-4">
+                                                    <input
+                                                        type="email"
+                                                        id="email"
+                                                        name="email"
+                                                        className="form-control"
+                                                        value={email}
+                                                        onChange={onChange}
+                                                        required
+                                                    />
+                                                    <label className="form-label" htmlFor="email">
+                                                        Email
+                                                    </label>
+                                                </div>
+
+                                                <div className="form-outline mb-4">
+                                                    <input
+                                                        type="password"
+                                                        id="password"
+                                                        name="password"
+                                                        className="form-control"
+                                                        value={password}
+                                                        onChange={onChange}
+                                                        required
+                                                    />
+                                                    <label className="form-label" htmlFor="form3Example4">
+                                                        Password
+                                                    </label>
+                                                </div>
+                                                <p style={{ color: "black" }}>
+                                                    Already have an account? <Link to="/donorregister"> Signup</Link>
+                                                </p>
+
+                                                <button type="submit" className="btn btn-primary btn-block mb-4">
+                                                    Login
+                                                </button>
+                                            </form>
+                                            <form onSubmit={onSubmit}>
+                                                <div className="form-outline mb-4">
+                                                    <input
+                                                        type="string"
+                                                        id="public_key"
+                                                        name="public_key"
+                                                        className="form-control"
+                                                        value={publicKey}
+                                                        onChange={handleChange}
+                                                        required
+                                                    />
+                                                    <label className="form-label" htmlFor="public_key">
+                                                        Public Key
+                                                    </label>
+                                                </div>
+                                                <button type="submit" className="btn btn-primary btn-block mb-4">
+                                                    Check
+                                                </button>
+                                                {/* <div>
+                                                    <p>
+                                                        Don't have an account? <Link to="/donorregister">Signup</Link>{" "}
+                                                    </p>
+                                                </div> */}
+                                                {errMsg && <h3 className="error"> {errMsg} </h3>}
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
-                    {this.state.organ && this.state.organ.length >= 1 ? (
-                        <div
-                            class="alert alert col-md donor_id"
-                            style={{ marginLeft: "40px", marginRight: "20px" }}
-                            role="alert"
+                {donorDetails && donorDetails.length >= 1 ? (
+                    <div
+                        className="alert alert col-md donor_id"
+                        style={{ marginLeft: "40px", marginRight: "20px" }}
+                        role="alert"
+                    >
+                        <h4
+                            className="alert-heading"
+                            style={{ textAlign: "center", fontSize: "3em", color: "#2c3e50" }}
                         >
-                            <h4
-                                class="alert-heading"
-                                style={{ textAlign: "center", fontSize: "3em", color: "#2c3e50" }}
-                            >
-                                Donor Information{" "}
-                            </h4>
-                            <div class="card " style={{ maxWidth: "500px", marginLeft: "25vw" }}>
-                                <div class="card-body">
-                                    <h3 class="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>
-                                        Organ Needed: {this.state.organ}
-                                    </h3>
-                                    <h3 class="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>
-                                        Blood Group: {this.state.bloodgroup}
-                                    </h3>
-                                    <h3 class="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>
-                                        Match Found: {this.state.matchfound === true ? `Yes` : `No`}
-                                    </h3>
-                                    <h3 class="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>
-                                        Recipient ID:{" "}
-                                        {this.state.matchfound === true
-                                            ? `Recipient id: ${this.state.recipientId}`
-                                            : ``}
-                                    </h3>
-                                </div>
+                            Donor Information{" "}
+                        </h4>
+                        <div className="card " style={{ maxWidth: "500px", marginLeft: "25vw" }}>
+                            <div className="card-body">
+                                <h3 className="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>
+                                    Name: {donorDetails[0]}
+                                </h3>
+                                <h3 className="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>
+                                    Organ Needed: {donorDetails[1]}
+                                </h3>
+                                <h3 className="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>
+                                    Blood Group: {donorDetails[2]}
+                                </h3>
+                                <h3 className="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>
+                                    Match Found: {donorDetails[3] === true ? `Yes` : `No`}
+                                </h3>
+                                <h3 className="card-subtitle mb-2 text-muted" style={{ color: "#34495e" }}>
+                                    Recipient ID: {donorDetails[4] === true ? `Recipient id: ${donorDetails[4]}` : ``}
+                                </h3>
                             </div>
                         </div>
-                    ) : (
-                        <div />
-                    )}
-                </div>
-            </>
-        );
-    }
-}
-export default Donor_login;
+                    </div>
+                ) : (
+                    <div />
+                )}
+            </div>
+        </>
+    );
+};
+
+export default DonorLogin;

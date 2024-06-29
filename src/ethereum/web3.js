@@ -2,7 +2,7 @@ import Web3 from "web3";
 import configurations from "./abi.json";
 
 // const contractAddress = configurations.networks["5777"].address;
-const contractAddress = "0x8bfd099363c2EC5a386DeC6071b9724A472cc9B0";
+const contractAddress = "0xa7a377343Ded512c623C905998604537653743a4";
 const contractABI = configurations;
 const web3 = new Web3(Web3.givenProvider || "http://127.0.0.1:7545");
 const contract = new web3.eth.Contract(contractABI, contractAddress);

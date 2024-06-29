@@ -30,7 +30,7 @@ const RegisterRecipient = () => {
         successMsg: "",
     });
 
-    const tokenContractAddress = "0x8bfd099363c2EC5a386DeC6071b9724A472cc9B0";
+    const tokenContractAddress = "0xa7a377343Ded512c623C905998604537653743a4";
 
     // const onSubmit = async (event) => {
     //     event.preventDefault();
@@ -104,8 +104,12 @@ const RegisterRecipient = () => {
                 const addRecepient = await tokenContract.addRecipient(
                     checksumAddress,
                     checksumAddress,
-                    result,
-                    result1,
+                    fname,
+                    lname,
+                    gender,
+                    city,
+                    phone,
+                    email,
                     organ,
                     bloodgroup
                 );

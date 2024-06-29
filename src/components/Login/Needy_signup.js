@@ -24,6 +24,7 @@ function Needy_signup() {
         phone: "",
         email: "",
         bloodgroup: "A+",
+        organ: "Eyes",
         errMsg: "",
         succMsg: "",
         pass: "",
@@ -40,27 +41,34 @@ function Needy_signup() {
         try {
             if (!address) {
                 console.log("wallet connect first");
+                alert("Wallet Connect First");
                 return;
             }
-            const { fname, lname, gender, city, phone, email, bloodgroup, pass, weight, height } = state;
+            const { fname, lname, gender, city, phone, email, bloodgroup, pass, weight, height, organ } = state;
             createUserWithEmailAndPassword(auth, email, pass).then(async ({ user }) => {
-                await addUser({
-                    accessToken: user.accessToken,
-                    displayName: fname,
-                    lname: lname,
-                    email: email,
-                    gender: gender,
-                    city: city,
-                    bloodgroup: bloodgroup,
-                    phone: phone,
-                    weight: weight,
-                    height: height,
-                    wallet: address,
-                    donorType: "OrganRecepient",
-                    reloadUserInfo: user.reloadUserInfo,
-                    uid: user.uid,
-                });
-                navigate("/");
+                try {
+                    await addUser({
+                        accessToken: user.accessToken,
+                        displayName: fname,
+                        lname: lname,
+                        email: email,
+                        gender: gender,
+                        city: city,
+                        bloodgroup: bloodgroup,
+                        phone: phone,
+                        organ: organ,
+                        weight: weight,
+                        height: height,
+                        wallet: address,
+                        type: "needy",
+                        status: false,
+                        reloadUserInfo: user.reloadUserInfo,
+                        uid: user.uid,
+                    });
+                    navigate("/");
+                } catch (error) {
+                    console.log(error);
+                }
             });
         } catch (error) {
             setState((prevState) => ({ ...prevState, errMsg: error.message }));
@@ -208,6 +216,46 @@ function Needy_signup() {
                                                 style={{ width: "100%" }}
                                             />
                                         </div>
+                                        <div className="input_field select_option">
+                                            <select
+                                                name="city"
+                                                placeholder="Choose City"
+                                                value={state.city}
+                                                onChange={onChange}
+                                                required
+                                            >
+                                                <option>Select a City for Hospital location</option>
+                                                <option value="Karachi">Karachi</option>
+                                                <option value="Lahore">Lahore</option>
+                                                <option value="Islamabad">Islamabad</option>
+                                                <option value="Rawalpindi">Rawalpindi</option>
+                                                <option value="Peshawar">Peshawar</option>
+                                                <option value="Multan">Multan</option>
+                                            </select>
+                                        </div>
+                                        <div className="input_field select_option">
+                                            <select
+                                                name="organ"
+                                                placeholder="Choose Organ"
+                                                value={state.organ}
+                                                onChange={onChange}
+                                                required
+                                            >
+                                                <option>Select a organ to need</option>
+                                                <option value="Eyes">Eyes</option>
+                                                <option value="Heart">Heart</option>
+                                                <option value="Lungs">Lungs</option>
+                                                <option value="Liver">Liver</option>
+                                                <option value="Pancreas">Pancreas</option>
+                                                <option value="Kidney">Kidney</option>
+                                            </select>
+                                        </div>
+                                        {address && (
+                                            <p style={{ color: "white" }}>{`${address.slice(0, 6)}...${address.slice(
+                                                address.length - 6,
+                                                address.length
+                                            )}`}</p>
+                                        )}
 
                                         <Front />
                                         <input className="button" type="submit" value="Register" />

@@ -7,6 +7,7 @@ import { auth } from "../../utils/firebase";
 import getUser from "../../api/getUser";
 import { AuthContext } from "../Context";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Hospital_login = () => {
     const [email, setEmail] = useState("");
@@ -104,6 +105,9 @@ const Hospital_login = () => {
                                                         Password
                                                     </label>
                                                 </div>
+                                                <p style={{ color: "black" }}>
+                                                    Already have an account? <Link to="/hospitalsignup"> Signup</Link>
+                                                </p>
 
                                                 <button type="submit" className="btn btn-primary btn-block mb-4">
                                                     Login

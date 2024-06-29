@@ -15,7 +15,7 @@ const RenderList = (props) => {
         open: false,
     });
 
-    const tokenContractAddress = "0x8bfd099363c2EC5a386DeC6071b9724A472cc9B0";
+    const tokenContractAddress = "0xa7a377343Ded512c623C905998604537653743a4";
 
     const onMatch = async () => {
         setState({ ...state, loading: true, open: false });
@@ -26,6 +26,7 @@ const RenderList = (props) => {
                 const signer = provider.getSigner();
                 const gasPrice = await signer.getGasPrice();
                 const tokenContract = new ethers.Contract(tokenContractAddress, TokenABI, signer);
+                console.log("🚀 ~ onMatch ~ tokenContract:", tokenContract);
 
                 const result = await tokenContract.transplantMatch("0x4DA21707a86F29033F26c0adBd70E9D105299467");
                 console.log("🚀 ~ onMatch ~ result:", result);

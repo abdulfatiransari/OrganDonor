@@ -17,6 +17,9 @@ import TransplantMatch from "./components/Hospital/transplant-match";
 import { AuthContext } from "./components/Context";
 import { useState } from "react";
 import Needylogin from "./components/Login/Needy_login";
+import DonorList from "./components/donorList";
+import NeedyList from "./components/needyList";
+import Hospitalsignup from "./components/Login/Hospital_signup";
 function App() {
     const [currentUser, setCurrentUser] = useState();
     const [address, setAddress] = useState("");
@@ -93,7 +96,10 @@ function App() {
                     }
                 /> */}
 
-                    <Route exact path="/hospitallist" element={<HospitalList />} />
+                    <Route exact path="/hospitalsignup" element={<Hospitalsignup />} />
+                    <Route exact path="/dashboard/hospitallist" element={<HospitalList />} />
+                    <Route exact path="/dashboard/donorlist" element={<DonorList />} />
+                    <Route exact path="/dashboard/needylist" element={<NeedyList />} />
                 </Routes>
             </AuthContext.Provider>
         </>
