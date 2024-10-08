@@ -10,11 +10,10 @@ import addUser from "../../api/addUser";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../Context";
 import { Link } from "react-router-dom";
-import updateUser from "../../api/updateUser";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 function Hospital_signup() {
-    const { address, currentUser, setCurrentUser } = useContext(AuthContext);
+    const { address } = useContext(AuthContext);
     const [state, setState] = useState({
         name: "",
         city: "Karachi",

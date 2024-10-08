@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import jwtDecode from "jwt-decode";
 import contract from "../../ethereum/web3";
 import Web3 from "web3";
@@ -7,32 +7,29 @@ import { Header, Divider, Grid, Button } from "semantic-ui-react";
 import HospitalNav from "./Hospital_nav";
 import { ethers } from "ethers";
 import TokenABI from "../../ethereum/abi.json";
+import getUsers from "../../api/getUsers";
+import { AuthContext } from "../Context";
 
 const TransplantMatch = () => {
+    const { address } = useContext(AuthContext);
     const [recipientArr, setRecipientArr] = useState([]);
     const [loading, setLoading] = useState(true);
     const [errMsg, setErrMsg] = useState("");
-    const [recipientCount, setRecipientCount] = useState(0);
 
     const tokenContractAddress = "0xa7a377343Ded512c623C905998604537653743a4";
 
     const onCheck = async (event) => {
-        const token = localStorage.getItem("token");
-        const decodedToken = jwtDecode(token);
-        const hospitalId = decodedToken.key;
-
         if (typeof window.ethereum !== "undefined") {
             try {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
-                const gasPrice = await signer.getGasPrice();
                 const tokenContract = new ethers.Contract(tokenContractAddress, TokenABI, signer);
 
-                const result = await tokenContract.getRecipientCount(hospitalId);
+                const result = await tokenContract.getRecipientCount(address);
                 const newRecipientArr = [];
 
                 for (let i = 0; i < result[0]; i++) {
-                    const recipient = await tokenContract.getRecipientDetail(hospitalId, i);
+                    const recipient = await tokenContract.getRecipientDetail(address, i);
 
                     if (recipient[1] === "") {
                         continue;
@@ -103,23 +100,18 @@ const TransplantMatch = () => {
 
     const onCheckdummy = async (event) => {
         try {
+            const data = await getUsers();
+            const filter = data.filter((item) => item.type === "needy" && item.status === false);
+            // setNeedyList(filter);
+
             const newRecipientArr = [];
-
-            // Loop through the recipients array and push each recipient to newRecipientArr
-            recipients.forEach((recipient) => {
-                // Check if any field of the recipient is empty
+            filter.forEach((recipient) => {
                 if (recipient.recipientId === "" || recipient.organ === "" || recipient.bloodgroup === "") {
-                    return; // Skip this recipient if any field is empty
+                    return;
                 }
-
-                // Clone the recipient object to avoid mutating the original object
                 const clonedRecipient = { ...recipient };
-
-                // Push the cloned recipient to the new array
                 newRecipientArr.push(clonedRecipient);
             });
-
-            // Set the state with the new array of recipients
             setRecipientArr(newRecipientArr);
         } catch (err) {
             console.log("Error Caught => ", err);
@@ -211,37 +203,37 @@ const TransplantMatch = () => {
     return (
         <div>
             <HospitalNav />
-            {/* {loading ? (
+            {loading ? (
                 <Header as="h3" color="grey" style={{ textAlign: "center" }}>
                     Click Below if you want to see the transplant matches <br />
                     <Button positive type="submit" onClick={onCheck}>
                         Check
                     </Button>
                 </Header>
-            ) : ( */}
-            <div
-                style={{
-                    marginTop: "20px",
-                    display: "flex",
-                    paddingLeft: "60px",
-                    paddingRight: "10px",
-                    justifyContent: "center",
-                    width: "100%",
-                }}
-            >
+            ) : (
                 <div
                     style={{
+                        marginTop: "20px",
                         display: "flex",
-                        gap: "20px",
-                        flexWrap: "wrap",
+                        paddingLeft: "60px",
+                        paddingRight: "10px",
                         justifyContent: "center",
                         width: "100%",
                     }}
                 >
-                    {renderList()}
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: "20px",
+                            flexWrap: "wrap",
+                            justifyContent: "center",
+                            width: "100%",
+                        }}
+                    >
+                        {renderList()}
+                    </div>
                 </div>
-            </div>
-            {/* )} */}
+            )}
         </div>
     );
 };

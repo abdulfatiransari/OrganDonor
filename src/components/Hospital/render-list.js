@@ -13,30 +13,30 @@ const RenderList = (props) => {
         donorFound: false,
         loading: false,
         open: false,
+        wallet: "",
     });
 
     const tokenContractAddress = "0xa7a377343Ded512c623C905998604537653743a4";
 
-    const onMatch = async () => {
+    const onMatch = async (addr) => {
         setState({ ...state, loading: true, open: false });
 
         if (typeof window.ethereum !== "undefined") {
             try {
                 const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
-                const gasPrice = await signer.getGasPrice();
                 const tokenContract = new ethers.Contract(tokenContractAddress, TokenABI, signer);
                 console.log("🚀 ~ onMatch ~ tokenContract:", tokenContract);
 
-                const result = await tokenContract.transplantMatch("0x4DA21707a86F29033F26c0adBd70E9D105299467");
+                const result = await tokenContract.transplantMatch(addr);
                 console.log("🚀 ~ onMatch ~ result:", result);
 
                 if (result === "false") {
                     throw Object.assign(new Error("Match Not Found!"));
                 } else {
-                    const donorId = await tokenContract.getMatchedDonor("0x4DA21707a86F29033F26c0adBd70E9D105299467");
+                    const donorId = await tokenContract.getMatchedDonor(addr);
                     console.log("🚀 ~ onMatch ~ donorId:", donorId);
-                    const donor = await tokenContract.getDonor("0x4DA21707a86F29033F26c0adBd70E9D105299467");
+                    const donor = await tokenContract.getDonor(addr);
                     console.log("🚀 ~ onMatch ~ donor:", donor);
                     setState({ ...state, donorId, organ: donor[1], bloodgroup: donor[2], donorFound: true });
                 }
@@ -93,6 +93,9 @@ const RenderList = (props) => {
                                 <br />
                                 <strong>Blood Group : </strong> {state.bloodgroup} <br />
                                 <br />
+                                <strong>Wallet : </strong>{" "}
+                                {`${state.wallet.slice(0, 4)}...${state.wallet.slice(-4, state.wallet.length)}`} <br />
+                                <br />
                             </Card.Description>
                         </Card.Content>
                         <Card.Content extra style={{ textAlign: "center" }}>
@@ -110,6 +113,13 @@ const RenderList = (props) => {
                             <br />
                             <strong>Blood Group : </strong> {props.recipient.bloodgroup} <br />
                             <br />
+                            <strong>Wallet : </strong>{" "}
+                            {`${props.recipient.wallet.slice(0, 4)}...${props.recipient.wallet.slice(
+                                -4,
+                                props.recipient.wallet.length
+                            )}`}{" "}
+                            <br />
+                            <br />
                         </Card.Description>
                     </Card.Content>
                     <Portal onClose={handleClose} open={state.open}>
@@ -124,7 +134,12 @@ const RenderList = (props) => {
                                 Recipient
                             </Header>
                         ) : (
-                            <Button loading={state.loading} content="Match" positive onClick={onMatch} />
+                            <Button
+                                loading={state.loading}
+                                content="Match"
+                                positive
+                                onClick={() => onMatch(props.recipient.wallet)}
+                            />
                         )}
                     </Card.Content>
                 </Card>
