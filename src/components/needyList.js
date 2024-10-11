@@ -118,7 +118,7 @@ export default function NeedyList() {
                                     <th>Blood Group</th>
                                     <th>Phone no</th>
                                     <th>Wallet</th>
-                                    {currentUser.type === "hospital" && <th>Action</th>}
+                                    {currentUser?.type === "hospital" && <th>Action</th>}
                                 </tr>
                             </thead>
                             <tbody>
@@ -231,7 +231,7 @@ export default function NeedyList() {
                                                 onClick={() => copyToClipboard(needy.wallet)}
                                             />
                                         </td>
-                                        {currentUser.type === "hospital" && (
+                                        {currentUser?.type === "hospital" && (
                                             <td
                                                 style={{
                                                     paddingLeft: "10px",

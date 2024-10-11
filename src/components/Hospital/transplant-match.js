@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import jwtDecode from "jwt-decode";
-import contract from "../../ethereum/web3";
-import Web3 from "web3";
 import RenderList from "./render-list";
-import { Header, Divider, Grid, Button } from "semantic-ui-react";
+import { Header, Divider, Button } from "semantic-ui-react";
 import HospitalNav from "./Hospital_nav";
 import { ethers } from "ethers";
 import TokenABI from "../../ethereum/abi.json";
@@ -27,10 +24,21 @@ const TransplantMatch = () => {
                 const tokenContract = new ethers.Contract(tokenContractAddress, TokenABI, signer);
 
                 const result = await tokenContract.getRecipientCount(address);
-                const newRecipientArr = [];
+                console.log("🚀 ~ onCheck ~ result:", result);
 
-                for (let i = 0; i < result[0]; i++) {
+                // Check if result[0] is a valid number greater than 0
+                const recipientCount = parseInt(result);
+                if (isNaN(recipientCount) || recipientCount <= 0) {
+                    console.log("No recipients found.");
+                    return;
+                }
+
+                let newRecipientArr = [];
+
+                for (let i = 0; i < result; i++) {
+                    console.log(address, i);
                     const recipient = await tokenContract.getRecipientDetail(address, i);
+                    console.log("🚀 ~ onCheck ~ recipient:", recipient);
 
                     if (recipient[1] === "") {
                         continue;
@@ -44,6 +52,7 @@ const TransplantMatch = () => {
                     const element = JSON.parse(data);
                     newRecipientArr.push(element);
                 }
+                console.log(newRecipientArr);
                 setRecipientArr(newRecipientArr);
             } catch (err) {
                 console.log("Error Caught => ", err);

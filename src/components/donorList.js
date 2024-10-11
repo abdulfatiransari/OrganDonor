@@ -69,6 +69,7 @@ export default function DonorList() {
             }
         } catch (err) {
             alert("Donor doesn't exist or already exists");
+            console.log(err);
         }
     };
 
@@ -116,7 +117,7 @@ export default function DonorList() {
                                     <th>Blood Group</th>
                                     <th>Phone no</th>
                                     <th>Wallet</th>
-                                    {currentUser.type === "hospital" && <th>Action</th>}
+                                    {currentUser?.type === "hospital" && <th>Action</th>}
                                 </tr>
                             </thead>
                             <tbody>
@@ -229,7 +230,7 @@ export default function DonorList() {
                                                 onClick={() => copyToClipboard(donor.wallet)}
                                             />
                                         </td>
-                                        {currentUser.type === "hospital" && (
+                                        {currentUser?.type === "hospital" && (
                                             <td
                                                 style={{
                                                     paddingLeft: "10px",

@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import { Card, Button, Header, Portal, Segment } from "semantic-ui-react";
-import contract from "../../ethereum/web3";
-import Web3 from "web3";
 import { ethers } from "ethers";
 import TokenABI from "../../ethereum/abi.json";
 import { AuthContext } from "../Context";
 
 const RenderList = (props) => {
+    console.log("🚀 ~ RenderList ~ props:", props);
     const { currentUser } = useContext(AuthContext);
     const [state, setState] = useState({
         donorId: "",
@@ -96,7 +95,11 @@ const RenderList = (props) => {
                                 <strong>Blood Group : </strong> {state.bloodgroup} <br />
                                 <br />
                                 <strong>Wallet : </strong>{" "}
-                                {`${state.wallet.slice(0, 4)}...${state.wallet.slice(-4, state.wallet.length)}`} <br />
+                                {`${state.recipientId.slice(0, 4)}...${state.recipientId.slice(
+                                    -4,
+                                    state.recipientId.length
+                                )}`}{" "}
+                                <br />
                                 <br />
                             </Card.Description>
                         </Card.Content>
@@ -110,16 +113,26 @@ const RenderList = (props) => {
                 <Card style={{ minWidth: "260px" }}>
                     <Card.Content>
                         <Card.Description style={{ fontSize: "14px", textAlign: "center" }}>
-                            <Card.Meta>{props.recipient.recipientId}</Card.Meta>
-                            <strong>Organ : </strong> {props.recipient.organ} <br />
-                            <br />
-                            <strong>Blood Group : </strong> {props.recipient.bloodgroup} <br />
-                            <br />
-                            <strong>Wallet : </strong>{" "}
-                            {`${props.recipient.wallet.slice(0, 4)}...${props.recipient.wallet.slice(
+                            <Card.Meta>{`${props?.recipient?.recipientId?.slice(
+                                0,
+                                4
+                            )}...${props?.recipient?.recipientId?.slice(
                                 -4,
-                                props.recipient.wallet.length
-                            )}`}{" "}
+                                props?.recipient?.recipientId?.length
+                            )}`}</Card.Meta>
+                            <strong>Organ : </strong> {props?.recipient?.organ} <br />
+                            <br />
+                            <strong>Blood Group : </strong> {props?.recipient?.bloodgroup} <br />
+                            <br />
+                            {props?.recipient?.wallet && (
+                                <>
+                                    <strong>Wallet : </strong>{" "}
+                                    {`${props?.recipient?.wallet?.slice(0, 4)}...${props?.recipient?.wallet?.slice(
+                                        -4,
+                                        props?.recipient?.wallet?.length
+                                    )}`}{" "}
+                                </>
+                            )}
                             <br />
                             <br />
                         </Card.Description>
@@ -135,12 +148,12 @@ const RenderList = (props) => {
                             <Header as="h3" color="grey">
                                 Recipient
                             </Header>
-                        ) : !currentUser.type === "hospital" ? (
+                        ) : currentUser.type === "hospital" ? (
                             <Button
                                 loading={state.loading}
                                 content="Match"
                                 positive
-                                onClick={() => onMatch(props.recipient.wallet)}
+                                onClick={() => onMatch(props.recipient.wallet || props?.recipient?.recipientId)}
                             />
                         ) : null}
                     </Card.Content>
