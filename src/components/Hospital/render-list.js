@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Card, Button, Header, Portal, Segment } from "semantic-ui-react";
 import contract from "../../ethereum/web3";
 import Web3 from "web3";
 import { ethers } from "ethers";
 import TokenABI from "../../ethereum/abi.json";
+import { AuthContext } from "../Context";
 
 const RenderList = (props) => {
+    const { currentUser } = useContext(AuthContext);
     const [state, setState] = useState({
         donorId: "",
         bloodgroup: "",
@@ -133,14 +135,14 @@ const RenderList = (props) => {
                             <Header as="h3" color="grey">
                                 Recipient
                             </Header>
-                        ) : (
+                        ) : !currentUser.type === "hospital" ? (
                             <Button
                                 loading={state.loading}
                                 content="Match"
                                 positive
                                 onClick={() => onMatch(props.recipient.wallet)}
                             />
-                        )}
+                        ) : null}
                     </Card.Content>
                 </Card>
             </Card.Group>

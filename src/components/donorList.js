@@ -1,13 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import HospitalNav from "./Hospital/Hospital_nav";
 import getUsers from "../api/getUsers";
 import { Button } from "semantic-ui-react";
 import { ethers } from "ethers";
 import TokenABI from "../ethereum/abi.json";
 import updateUser from "../api/updateUser";
+import Top3 from "./Navbar/Top3";
+import { AuthContext } from "./Context";
 
 export default function DonorList() {
     const [donorList, setDonorList] = React.useState([]);
+    const { currentUser } = useContext(AuthContext);
     const tokenContractAddress = "0xa7a377343Ded512c623C905998604537653743a4";
 
     const getDonorData = async () => {
@@ -76,170 +79,175 @@ export default function DonorList() {
         <div>
             <HospitalNav />
             <div>
-                <p
-                    style={{
-                        color: "white",
-                        marginTop: "20px",
-                        display: "flex",
-                        paddingLeft: "60px",
-                        paddingRight: "10px",
-                        justifyContent: "center",
-                        width: "100%",
-                        fontSize: "40px",
-                        fontWeight: "bold",
-                    }}
-                >
-                    Donor List
-                </p>
-                <div
-                    style={{
-                        overflowX: "auto",
-                        color: "white",
-                        paddingLeft: "80px",
-                        width: "100%",
-                    }}
-                >
-                    <table style={{ width: "100%" }}>
-                        <thead>
-                            <tr>
-                                <th>S.No</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Gender</th>
-                                <th>Organ</th>
-                                <th>Blood Group</th>
-                                <th>Phone no</th>
-                                <th>Wallet</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {donorList.map((donor, idx) => (
-                                <tr key={idx}>
-                                    <td
-                                        style={{
-                                            paddingLeft: "10px",
-                                            paddingRight: "10px",
-                                            paddingTop: "5px",
-                                            paddingBottom: "5px",
-                                        }}
-                                    >
-                                        {idx + 1}
-                                    </td>
-                                    <td
-                                        style={{
-                                            paddingLeft: "10px",
-                                            paddingRight: "10px",
-                                            paddingTop: "5px",
-                                            paddingBottom: "5px",
-                                        }}
-                                    >
-                                        {donor.displayName}
-                                    </td>
-                                    <td
-                                        style={{
-                                            paddingLeft: "10px",
-                                            paddingRight: "10px",
-                                            paddingTop: "5px",
-                                            paddingBottom: "5px",
-                                        }}
-                                    >
-                                        {donor.lname}
-                                    </td>
-                                    <td
-                                        style={{
-                                            paddingLeft: "10px",
-                                            paddingRight: "10px",
-                                            paddingTop: "5px",
-                                            paddingBottom: "5px",
-                                        }}
-                                    >
-                                        {donor.email}
-                                    </td>
-                                    <td
-                                        style={{
-                                            paddingLeft: "10px",
-                                            paddingRight: "10px",
-                                            paddingTop: "5px",
-                                            paddingBottom: "5px",
-                                        }}
-                                    >
-                                        {donor.gender}
-                                    </td>
-                                    <td
-                                        style={{
-                                            paddingLeft: "10px",
-                                            paddingRight: "10px",
-                                            paddingTop: "5px",
-                                            paddingBottom: "5px",
-                                        }}
-                                    >
-                                        {donor.organ}
-                                    </td>
-                                    <td
-                                        style={{
-                                            paddingLeft: "10px",
-                                            paddingRight: "10px",
-                                            paddingTop: "5px",
-                                            paddingBottom: "5px",
-                                        }}
-                                    >
-                                        {donor.bloodgroup}
-                                    </td>
-                                    <td
-                                        style={{
-                                            paddingLeft: "10px",
-                                            paddingRight: "10px",
-                                            paddingTop: "5px",
-                                            paddingBottom: "5px",
-                                        }}
-                                    >
-                                        {donor.phone}
-                                    </td>
-                                    <td
-                                        style={{
-                                            paddingLeft: "10px",
-                                            paddingRight: "10px",
-                                            paddingTop: "5px",
-                                            paddingBottom: "5px",
-                                            display: "flex",
-                                            width: "120px",
-                                            alignItems: "center",
-                                            gap: "5px",
-                                        }}
-                                    >
-                                        {`${donor.wallet.slice(0, 4)}...${donor.wallet.slice(
-                                            donor.wallet.length - 4,
-                                            donor.wallet.length
-                                        )}`}
-                                        <i
-                                            className="fa fa-fw fa-copy"
-                                            style={{
-                                                fontSize: "1em",
-                                                cursor: "pointer",
-                                                display: "flex",
-                                                alignItems: "center",
-                                            }}
-                                            onClick={() => copyToClipboard(donor.wallet)}
-                                        />
-                                    </td>
-                                    <td
-                                        style={{
-                                            paddingLeft: "10px",
-                                            paddingRight: "10px",
-                                            paddingTop: "5px",
-                                            paddingBottom: "5px",
-                                        }}
-                                    >
-                                        <Button positive type="submit" onClick={() => onApprove(donor)}>
-                                            Approve
-                                        </Button>
-                                    </td>
+                <Top3 />
+                <div>
+                    <p
+                        style={{
+                            color: "white",
+                            marginTop: "20px",
+                            display: "flex",
+                            paddingLeft: "60px",
+                            paddingRight: "10px",
+                            justifyContent: "center",
+                            width: "100%",
+                            fontSize: "40px",
+                            fontWeight: "bold",
+                        }}
+                    >
+                        Donor List
+                    </p>
+                    <div
+                        style={{
+                            overflowX: "auto",
+                            color: "white",
+                            paddingLeft: "80px",
+                            width: "100%",
+                        }}
+                    >
+                        <table style={{ width: "100%" }}>
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Gender</th>
+                                    <th>Organ</th>
+                                    <th>Blood Group</th>
+                                    <th>Phone no</th>
+                                    <th>Wallet</th>
+                                    {currentUser.type === "hospital" && <th>Action</th>}
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {donorList.map((donor, idx) => (
+                                    <tr key={idx}>
+                                        <td
+                                            style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                paddingTop: "5px",
+                                                paddingBottom: "5px",
+                                            }}
+                                        >
+                                            {idx + 1}
+                                        </td>
+                                        <td
+                                            style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                paddingTop: "5px",
+                                                paddingBottom: "5px",
+                                            }}
+                                        >
+                                            {donor.displayName}
+                                        </td>
+                                        <td
+                                            style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                paddingTop: "5px",
+                                                paddingBottom: "5px",
+                                            }}
+                                        >
+                                            {donor.lname}
+                                        </td>
+                                        <td
+                                            style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                paddingTop: "5px",
+                                                paddingBottom: "5px",
+                                            }}
+                                        >
+                                            {donor.email}
+                                        </td>
+                                        <td
+                                            style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                paddingTop: "5px",
+                                                paddingBottom: "5px",
+                                            }}
+                                        >
+                                            {donor.gender}
+                                        </td>
+                                        <td
+                                            style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                paddingTop: "5px",
+                                                paddingBottom: "5px",
+                                            }}
+                                        >
+                                            {donor.organ}
+                                        </td>
+                                        <td
+                                            style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                paddingTop: "5px",
+                                                paddingBottom: "5px",
+                                            }}
+                                        >
+                                            {donor.bloodgroup}
+                                        </td>
+                                        <td
+                                            style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                paddingTop: "5px",
+                                                paddingBottom: "5px",
+                                            }}
+                                        >
+                                            {donor.phone}
+                                        </td>
+                                        <td
+                                            style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                paddingTop: "5px",
+                                                paddingBottom: "5px",
+                                                display: "flex",
+                                                width: "120px",
+                                                alignItems: "center",
+                                                gap: "5px",
+                                            }}
+                                        >
+                                            {`${donor.wallet.slice(0, 4)}...${donor.wallet.slice(
+                                                donor.wallet.length - 4,
+                                                donor.wallet.length
+                                            )}`}
+                                            <i
+                                                className="fa fa-fw fa-copy"
+                                                style={{
+                                                    fontSize: "1em",
+                                                    cursor: "pointer",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                }}
+                                                onClick={() => copyToClipboard(donor.wallet)}
+                                            />
+                                        </td>
+                                        {currentUser.type === "hospital" && (
+                                            <td
+                                                style={{
+                                                    paddingLeft: "10px",
+                                                    paddingRight: "10px",
+                                                    paddingTop: "5px",
+                                                    paddingBottom: "5px",
+                                                }}
+                                            >
+                                                <Button positive type="submit" onClick={() => onApprove(donor)}>
+                                                    Approve
+                                                </Button>
+                                            </td>
+                                        )}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

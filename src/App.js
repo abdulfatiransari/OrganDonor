@@ -35,30 +35,17 @@ function App() {
                     <Route exact path="/hospitallogin" element={<Hospitallogin />} />
                     <Route exact path="/donorlogin" element={<Donorlogin />} />
                     {/* dummy */}
-                    <Route exact path="/dashboard" element={<Mainpage />} />
-                    {/* <Route
-                    exact
-                    path="/Main_page"
-                    element={
-                        window.localStorage.getItem("isAuthenticated") ? (
-                            <Mainpage />
-                        ) : (
-                            <Navigate to="/hospitallogin" />
-                        )
-                    }
-                /> */}
-                    <Route exact path="/dashboard/approvedonor" element={<ApproveDonor />} />
-                    {/* <Route
-                    exact
-                    path="/Approve_donor"
-                    element={
-                        window.localStorage.getItem("isAuthenticated") ? (
-                            <ApproveDonor />
-                        ) : (
-                            <Navigate to="/hospitallogin" />
-                        )
-                    }
-                /> */}
+                    <Route
+                        exact
+                        path="/dashboard"
+                        element={!currentUser ? <Navigate to="/hospitallogin" /> : <Mainpage />}
+                    />
+
+                    <Route
+                        exact
+                        path="/dashboard/approvedonor"
+                        element={!currentUser ? <Navigate to="/hospitallogin" /> : <ApproveDonor />}
+                    />
                     <Route exact path="/patientlist" element={<PatientRecord />} />
                     {/* <Route
                     exact
@@ -71,31 +58,16 @@ function App() {
                         )
                     }
                 /> */}
-                    <Route exact path="/dashboard/registerrecipient" element={<RegisterRecipient />} />
-                    {/* <Route
-                    exact
-                    path="/RegisterRecipient"
-                    element={
-                        window.localStorage.getItem("isAuthenticated") ? (
-                            <RegisterRecipient />
-                        ) : (
-                            <Navigate to="/hospitallogin" />
-                        )
-                    }
-                /> */}
-                    <Route exact path="/dashboard/transplantmatch" element={<TransplantMatch />} />
-                    {/* <Route
-                    exact
-                    path="/Transplant_match"
-                    element={
-                        window.localStorage.getItem("isAuthenticated") ? (
-                            <TransplantMatch />
-                        ) : (
-                            <Navigate to="/hospitallogin" />
-                        )
-                    }
-                /> */}
-
+                    <Route
+                        exact
+                        path="/dashboard/registerrecipient"
+                        element={!currentUser ? <Navigate to="/hospitallogin" /> : <RegisterRecipient />}
+                    />
+                    <Route
+                        exact
+                        path="/dashboard/transplantmatch"
+                        element={!currentUser ? <Navigate to="/hospitallogin" /> : <TransplantMatch />}
+                    />
                     <Route exact path="/hospitalsignup" element={<Hospitalsignup />} />
                     <Route exact path="/dashboard/hospitallist" element={<HospitalList />} />
                     <Route exact path="/dashboard/donorlist" element={<DonorList />} />

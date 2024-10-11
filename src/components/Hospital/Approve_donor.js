@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 import { Form, Segment, Header, Button, Divider, Message } from "semantic-ui-react";
-import axios from "axios";
 import "semantic-ui-css/semantic.min.css";
 import HospitalNav from "./Hospital_nav";
-import contract from "../../ethereum/web3";
-import Web3 from "web3";
 import { ethers } from "ethers";
 import TokenABI from "../../ethereum/abi.json";
-
-const sha3 = require("js-sha3");
-const { toChecksumAddress } = require("ethereumjs-util");
 
 const ApproveDonor = () => {
     const [formData, setFormData] = useState({

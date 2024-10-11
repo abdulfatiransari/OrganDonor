@@ -9,6 +9,7 @@ import { ethers } from "ethers";
 import TokenABI from "../../ethereum/abi.json";
 import getUsers from "../../api/getUsers";
 import { AuthContext } from "../Context";
+import Top3 from "../Navbar/Top3";
 
 const TransplantMatch = () => {
     const { address } = useContext(AuthContext);
@@ -203,37 +204,40 @@ const TransplantMatch = () => {
     return (
         <div>
             <HospitalNav />
-            {loading ? (
-                <Header as="h3" color="grey" style={{ textAlign: "center" }}>
-                    Click Below if you want to see the transplant matches <br />
-                    <Button positive type="submit" onClick={onCheck}>
-                        Check
-                    </Button>
-                </Header>
-            ) : (
-                <div
-                    style={{
-                        marginTop: "20px",
-                        display: "flex",
-                        paddingLeft: "60px",
-                        paddingRight: "10px",
-                        justifyContent: "center",
-                        width: "100%",
-                    }}
-                >
+            <div>
+                <Top3 />
+                {loading ? (
+                    <Header as="h3" color="grey" style={{ textAlign: "center" }}>
+                        Click Below if you want to see the transplant matches <br />
+                        <Button positive type="submit" onClick={onCheck}>
+                            Check
+                        </Button>
+                    </Header>
+                ) : (
                     <div
                         style={{
+                            marginTop: "20px",
                             display: "flex",
-                            gap: "20px",
-                            flexWrap: "wrap",
+                            paddingLeft: "60px",
+                            paddingRight: "10px",
                             justifyContent: "center",
                             width: "100%",
                         }}
                     >
-                        {renderList()}
+                        <div
+                            style={{
+                                display: "flex",
+                                gap: "20px",
+                                flexWrap: "wrap",
+                                justifyContent: "center",
+                                width: "100%",
+                            }}
+                        >
+                            {renderList()}
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 };
