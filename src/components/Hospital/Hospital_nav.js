@@ -90,17 +90,17 @@ function Hospital_nav() {
                             <NavLink to="/dashboard/needylist">Needy List</NavLink>
                         </NavText>
                     </NavItem>
-                    {/* <NavItem eventKey="approve_donor">
+                    <NavItem eventKey="predict">
                         <NavIcon>
-                            <NavLink to="/dashboard/approvedonor">
+                            <NavLink to="/dashboard/predict">
                                 <i className="fa fa-fw fa-check" style={{ fontSize: "1.75em" }} />
                             </NavLink>
                         </NavIcon>
                         <NavText>
-                            <NavLink to="/dashboard/approvedonor">Approve_donor</NavLink>
+                            <NavLink to="/dashboard/predict">Predict</NavLink>
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="register_recipient">
+                    {/* <NavItem eventKey="register_recipient">
                         <NavIcon>
                             <NavLink to="/dashboard/registerrecipient">
                                 <i className="fa fa-fw fa-heart" style={{ fontSize: "1.75em" }} />

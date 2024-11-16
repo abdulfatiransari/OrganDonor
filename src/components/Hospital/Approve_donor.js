@@ -64,8 +64,6 @@ const ApproveDonor = () => {
                     city,
                     phone,
                     email,
-                    // formData.ipfsHash || "retjytjygjgjh",
-                    // formData.EMRHash || "dhggfjjg",
                     organ,
                     bloodgroup
                 );
