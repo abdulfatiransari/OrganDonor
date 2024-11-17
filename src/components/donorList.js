@@ -29,6 +29,16 @@ export default function DonorList() {
         alert("Wallet Address copied!");
     };
 
+    const onDecline = async (donor) => {
+        try {
+            await updateUser(donor.id, { approveStatus: false });
+            getDonorData();
+            alert("Donor Declined!");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const onApprove = async (donor) => {
         // event.preventDefault();
 
@@ -230,7 +240,7 @@ export default function DonorList() {
                                                 onClick={() => copyToClipboard(donor.wallet)}
                                             />
                                         </td>
-                                        {currentUser?.type === "hospital" && (
+                                        {currentUser?.type === "hospital" && donor?.approveStatus && (
                                             <td
                                                 style={{
                                                     paddingLeft: "10px",
@@ -239,9 +249,27 @@ export default function DonorList() {
                                                     paddingBottom: "5px",
                                                 }}
                                             >
-                                                <Button positive type="submit" onClick={() => onApprove(donor)}>
-                                                    Approve
-                                                </Button>
+                                                <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                                                    <Button positive type="submit" onClick={() => onApprove(donor)}>
+                                                        Approve
+                                                    </Button>
+                                                    <button
+                                                        style={{
+                                                            padding: "10px 20px",
+                                                            backgroundColor: "red",
+                                                            color: "white",
+                                                            border: "none",
+                                                            borderRadius: "5px",
+                                                            cursor: "pointer",
+                                                            fontSize: "14px",
+                                                        }}
+                                                        positive
+                                                        type="submit"
+                                                        onClick={() => onDecline(donor)}
+                                                    >
+                                                        Decline
+                                                    </button>
+                                                </div>
                                             </td>
                                         )}
                                     </tr>

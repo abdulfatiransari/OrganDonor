@@ -97,7 +97,7 @@ function Hospital_nav() {
                             </NavLink>
                         </NavIcon>
                         <NavText>
-                            <NavLink to="/dashboard/predict">Predict</NavLink>
+                            <NavLink to="/dashboard/predict">Diagnosis</NavLink>
                         </NavText>
                     </NavItem>
                     {/* <NavItem eventKey="register_recipient">

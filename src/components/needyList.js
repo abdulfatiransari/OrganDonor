@@ -29,6 +29,16 @@ export default function NeedyList() {
         alert("Wallet Address copied!");
     };
 
+    const onDecline = async (needy) => {
+        try {
+            await updateUser(needy.id, { approveStatus: false });
+            getNeedyData();
+            alert("Needy Declined!");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     const addRecipient = async (needy) => {
         // event.preventDefault();
 
@@ -231,7 +241,7 @@ export default function NeedyList() {
                                                 onClick={() => copyToClipboard(needy.wallet)}
                                             />
                                         </td>
-                                        {currentUser?.type === "hospital" && (
+                                        {currentUser?.type === "hospital" && needy?.approveStatus && (
                                             <td
                                                 style={{
                                                     paddingLeft: "10px",
@@ -240,9 +250,27 @@ export default function NeedyList() {
                                                     paddingBottom: "5px",
                                                 }}
                                             >
-                                                <Button positive type="submit" onClick={() => addRecipient(needy)}>
-                                                    Add Recipient
-                                                </Button>
+                                                <div style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                                                    <Button positive type="submit" onClick={() => addRecipient(needy)}>
+                                                        Add Recipient
+                                                    </Button>
+                                                    <button
+                                                        style={{
+                                                            padding: "10px 20px",
+                                                            backgroundColor: "red",
+                                                            color: "white",
+                                                            border: "none",
+                                                            borderRadius: "5px",
+                                                            cursor: "pointer",
+                                                            fontSize: "14px",
+                                                        }}
+                                                        positive
+                                                        type="submit"
+                                                        onClick={() => onDecline(needy)}
+                                                    >
+                                                        Decline
+                                                    </button>
+                                                </div>
                                             </td>
                                         )}
                                     </tr>

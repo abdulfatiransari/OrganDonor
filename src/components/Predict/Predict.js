@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import HospitalNav from "../Hospital/Hospital_nav";
 import Top3 from "../Navbar/Top3";
-import { Button } from "semantic-ui-react";
 
 export default function Predict() {
     const [formData, setFormData] = useState({
@@ -96,11 +95,26 @@ export default function Predict() {
 
             <div>
                 <Top3 />
-                <div className="container" style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <div
+                    className="container"
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        maxHeight: "90vh",
+                        overflowY: "scroll",
+                    }}
+                >
                     <h1 style={{ color: "white", fontWeight: "bold" }}>CKD Prediction System</h1>
-                    <form
+                    {/* <form
                         onSubmit={handleSubmit}
-                        style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "400px" }}
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            flexWrap: "wrap",
+                            gap: "10px",
+                            justifyContent: "space-between",
+                        }}
                     >
                         <label
                             style={{ color: "white", display: "flex", justifyContent: "space-between", gap: "20px" }}
@@ -303,6 +317,78 @@ export default function Predict() {
                         <Button positive type="submit" style={{}}>
                             Predict
                         </Button>
+                    </form> */}
+                    <form
+                        onSubmit={handleSubmit}
+                        style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+                            gap: "20px",
+                            width: "100%",
+                            marginTop: "10px",
+                        }}
+                    >
+                        {[
+                            { label: "Age", id: "age", type: "number" },
+                            { label: "Blood Pressure (BP)", id: "blood_pressure", type: "number" },
+                            { label: "Specific Gravity (SG)", id: "specific_gravity", type: "number", step: "0.01" },
+                            { label: "Albumin (AL)", id: "albumin", type: "number" },
+                            { label: "Sugar (SU)", id: "sugar", type: "number" },
+                            { label: "Red Blood Cells (RBC)", id: "red_blood_cells", type: "text" },
+                            { label: "Pus Cells (PC)", id: "pus_cell", type: "text" },
+                            { label: "Pus Cell Clumps (PCC)", id: "pus_cell_clumps", type: "text" },
+                            { label: "Bacteria (BA)", id: "bacteria", type: "text" },
+                            { label: "Blood Glucose Random (BGR)", id: "blood_glucose_random", type: "number" },
+                            { label: "Blood Urea (BU)", id: "blood_urea", type: "number" },
+                            { label: "Serum Creatinine (SC)", id: "serum_creatinine", type: "number" },
+                            { label: "Sodium (SOD)", id: "sodium", type: "number" },
+                            { label: "Potassium (POT)", id: "potassium", type: "number" },
+                            { label: "Hemoglobin (HEMO)", id: "haemoglobin", type: "number" },
+                            { label: "Packed Cell Volume (PCV)", id: "packed_cell_volume", type: "number" },
+                            { label: "White Blood Cell Count (WBCC)", id: "white_blood_cell_count", type: "number" },
+                            { label: "Red Blood Cell Count (RBCC)", id: "red_blood_cell_count", type: "number" },
+                        ].map((field) => (
+                            <label
+                                key={field.id}
+                                style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    color: "white",
+                                    fontSize: "16px",
+                                }}
+                            >
+                                {field.label}
+                                <input
+                                    type={field.type}
+                                    id={field.id}
+                                    value={formData[field.id]}
+                                    onChange={handleChange}
+                                    required
+                                    step={field.step || undefined}
+                                    style={{
+                                        marginTop: "5px",
+                                        padding: "8px",
+                                        borderRadius: "5px",
+                                        border: "1px solid #ccc",
+                                    }}
+                                />
+                            </label>
+                        ))}
+                        <button
+                            type="submit"
+                            style={{
+                                padding: "10px 20px",
+                                backgroundColor: "#28a745",
+                                color: "white",
+                                border: "none",
+                                borderRadius: "5px",
+                                cursor: "pointer",
+                                fontSize: "16px",
+                                fontWeight: "bold",
+                            }}
+                        >
+                            Predict
+                        </button>
                     </form>
                     <div id="result">Prediction: {result}</div>
                 </div>
