@@ -1,7 +1,7 @@
 import "@fortawesome/fontawesome-svg-core";
 import SideNav, { NavIcon, NavItem, NavText } from "@trendmicro/react-sidenav";
 import "@trendmicro/react-sidenav/dist/react-sidenav.css";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "./main.css";
@@ -10,8 +10,7 @@ import Web3 from "web3";
 //import TransplantMatch from "./transplant-match";
 
 function Hospital_nav() {
-    const [loading, setLoading] = useState(false);
-    const { address, setAddress } = useContext(AuthContext);
+    const { address, setAddress, currentUser } = useContext(AuthContext);
 
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
@@ -19,7 +18,6 @@ function Hospital_nav() {
     };
 
     const onPressConnect = async () => {
-        setLoading(true);
         try {
             if (window?.ethereum) {
                 // Desktop browser
@@ -33,8 +31,6 @@ function Hospital_nav() {
         } catch (error) {
             console.log(error);
         }
-
-        setLoading(false);
     };
 
     const onPressLogout = () => setAddress("");
@@ -110,16 +106,18 @@ function Hospital_nav() {
                             <NavLink to="/dashboard/registerrecipient">Register Recipient</NavLink>
                         </NavText>
                     </NavItem> */}
-                    <NavItem eventKey="Transplant Match">
-                        <NavIcon>
-                            <NavLink to="/dashboard/transplantmatch">
-                                <i className="fa fa-fw fa-key" style={{ fontSize: "1.75em" }} />
-                            </NavLink>
-                        </NavIcon>
-                        <NavText>
-                            <NavLink to="/dashboard/transplantmatch">Transplant Match</NavLink>
-                        </NavText>
-                    </NavItem>
+                    {currentUser?.type === "hospital" && (
+                        <NavItem eventKey="Transplant Match">
+                            <NavIcon>
+                                <NavLink to="/dashboard/transplantmatch">
+                                    <i className="fa fa-fw fa-key" style={{ fontSize: "1.75em" }} />
+                                </NavLink>
+                            </NavIcon>
+                            <NavText>
+                                <NavLink to="/dashboard/transplantmatch">Transplant Match</NavLink>
+                            </NavText>
+                        </NavItem>
+                    )}
                     <NavItem onClick={onPressConnect}>
                         <NavIcon>
                             <NavLink to="#">

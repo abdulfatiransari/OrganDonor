@@ -12,8 +12,6 @@ import { AuthContext } from "../Context";
 import { Link } from "react-router-dom";
 
 function Needy_signup() {
-    const [signIn, toggle] = useState(true);
-
     const { address } = useContext(AuthContext);
     console.log("🚀 ~ Needy_signup ~ address:", address);
     const [state, setState] = useState({
@@ -62,6 +60,7 @@ function Needy_signup() {
                         wallet: address,
                         type: "needy",
                         status: false,
+                        approveStatus: true,
                         reloadUserInfo: user.reloadUserInfo,
                         uid: user.uid,
                     });

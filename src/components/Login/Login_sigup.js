@@ -54,6 +54,7 @@ const DonorSignUp = () => {
                     phone: phone,
                     type: "donor",
                     status: false,
+                    approveStatus: true,
                     wallet: address,
                     reloadUserInfo: user.reloadUserInfo,
                     uid: user.uid,
