@@ -127,6 +127,7 @@ export default function DonorList() {
                                     <th>Blood Group</th>
                                     <th>Phone no</th>
                                     <th>Wallet</th>
+                                    <th>Status</th>
                                     {currentUser?.type === "hospital" && <th>Action</th>}
                                 </tr>
                             </thead>
@@ -239,6 +240,16 @@ export default function DonorList() {
                                                 }}
                                                 onClick={() => copyToClipboard(donor.wallet)}
                                             />
+                                        </td>
+                                        <td
+                                            style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                paddingTop: "5px",
+                                                paddingBottom: "5px",
+                                            }}
+                                        >
+                                            {donor.approveStatus ? "Pending" : "Declined"}
                                         </td>
                                         {currentUser?.type === "hospital" && donor?.approveStatus && (
                                             <td

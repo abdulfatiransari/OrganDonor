@@ -128,6 +128,7 @@ export default function NeedyList() {
                                     <th>Blood Group</th>
                                     <th>Phone no</th>
                                     <th>Wallet</th>
+                                    <th>Status</th>
                                     {currentUser?.type === "hospital" && <th>Action</th>}
                                 </tr>
                             </thead>
@@ -240,6 +241,16 @@ export default function NeedyList() {
                                                 }}
                                                 onClick={() => copyToClipboard(needy.wallet)}
                                             />
+                                        </td>
+                                        <td
+                                            style={{
+                                                paddingLeft: "10px",
+                                                paddingRight: "10px",
+                                                paddingTop: "5px",
+                                                paddingBottom: "5px",
+                                            }}
+                                        >
+                                            {needy.approveStatus ? "Pending" : "Declined"}
                                         </td>
                                         {currentUser?.type === "hospital" && needy?.approveStatus && (
                                             <td
