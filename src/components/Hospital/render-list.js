@@ -94,12 +94,13 @@ const RenderList = (props) => {
                                 <br />
                                 <strong>Blood Group : </strong> {state.bloodgroup} <br />
                                 <br />
+                                <strong>Name : </strong> {state.displayName} <br />
+                                <br />
                                 <strong>Wallet : </strong>{" "}
                                 {`${state.recipientId.slice(0, 4)}...${state.recipientId.slice(
                                     -4,
                                     state.recipientId.length
                                 )}`}{" "}
-                                <br />
                                 <br />
                             </Card.Description>
                         </Card.Content>
@@ -113,16 +114,16 @@ const RenderList = (props) => {
                 <Card style={{ minWidth: "260px" }}>
                     <Card.Content>
                         <Card.Description style={{ fontSize: "14px", textAlign: "center" }}>
-                            <Card.Meta>{`${props?.recipient?.recipientId?.slice(
-                                0,
-                                4
-                            )}...${props?.recipient?.recipientId?.slice(
-                                -4,
-                                props?.recipient?.recipientId?.length
-                            )}`}</Card.Meta>
+                            <Card.Meta>
+                                <p style={{ textTransform: "capitalize" }}>{`${props?.recipient?.type}`}</p>
+                            </Card.Meta>
+                            <br />
                             <strong>Organ : </strong> {props?.recipient?.organ} <br />
                             <br />
                             <strong>Blood Group : </strong> {props?.recipient?.bloodgroup} <br />
+                            <br />
+                            <strong>Name : </strong> {props?.recipient?.displayName + " " + props?.recipient?.lname}{" "}
+                            <br />
                             <br />
                             {props?.recipient?.wallet && (
                                 <>
